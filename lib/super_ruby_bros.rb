@@ -17,6 +17,7 @@ tick = 0
 def jump
   if @jumper_state == "ready"
     @y_speed = -10
+    @jumper_state = 'jumping'
   end
 end
 
@@ -49,11 +50,7 @@ update do
   end
 
   if @square.y < (CEILING)
-    @jumper_state = 'jumping'  
-  end
-
-  if @jumper_state == 'jumping'
-    @y_speed = GRAVITY
+    @y_speed = GRAVITY 
   end
 
   if @square.y == FLOOR
