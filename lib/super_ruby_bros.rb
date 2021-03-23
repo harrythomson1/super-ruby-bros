@@ -3,7 +3,7 @@ require 'ruby2d'
 set title: "Super Ruby Bros", background: 'red'
 FLOOR = 400
 CEILING = 325
-GRAVITY = 2
+GRAVITY = 4
 @jumper_state = "ready"
 
 @square = Square.new(x: 40, y: FLOOR, size: 25, color: 'blue')
@@ -18,7 +18,7 @@ def jump
   if @jumper_state == "ready"
     @y_speed = -10
     @jumper_state = 'jumping'
-  end
+  end  
 end
 
 on :key do |event|
