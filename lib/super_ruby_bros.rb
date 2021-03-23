@@ -2,6 +2,7 @@ require 'ruby2d'
 
 set title: "Super Ruby Bros", background: 'red'
 FLOOR = 400
+CEILING = 325
 
 @square = Square.new(x: 40, y: FLOOR, size: 25, color: 'blue')
 
@@ -12,7 +13,7 @@ FLOOR = 400
 tick = 0
 
 def jump
-  @square.y += -5
+  @square.y -= 75
 end
 
 on :key do |event|
@@ -22,11 +23,11 @@ on :key do |event|
   elsif event.key == 'd'
     @x_speed = 2
     @y_speed = 0
-  # elsif event.key == 'j'
-  #   if @square.y == FLOOR
-  #     @square.y -= 75
-  #     p @square.y
-  #   end
+  # This code will create a jump but the animation won't look great  
+  elsif event.key == 'space'
+    if @square.y == FLOOR
+      jump
+    end
   end
 end
 
@@ -50,11 +51,11 @@ update do
 
   tick += 1
 
-  on :key do |event|
-    if event.key == 'j' && @square.y > 325
-      @square.y -= 0.03
-    end
-  end
+  # on :key do |event|
+  #   if event.key == 'space' && @square.y > CEILING
+  #     @square.y -= 0.03
+  #   end
+  # end
 
 end
 
