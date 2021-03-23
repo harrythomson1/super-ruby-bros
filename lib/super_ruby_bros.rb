@@ -22,46 +22,61 @@ def jump
   end 
 end
 
-on :key do |event|
-  if event.key == 'a'
-    @x_speed = -2
-  elsif event.key == 'd' && colissions_detection != true
-    @x_speed = 2
+on :key_held do |event|
+  if event.key == 'a' && wall_collission_right_detection != true
+    @square.x -= 2
+  elsif event.key == 'd' && wall_collission_left_detection != true
+    @square.x += 2
   end
 end
 
-on :key_up do |event|
-  if event.key == 'a'
-    @x_speed = 0
-  elsif event.key == 'd'
-    @x_speed = 0
-  end
+def wall_collission_right_detected?
+  @platform.contains?(@square.x1, @square.y1)
 end
 
-def colission_detected?
-  @platform.contains?(@square.x1, @square.y1) ||
-  @platform.contains?(@square.x2, @square.y2) ||
+def wall_collission_left_detected?
+  @platform.contains?(@square.x2, @square.y2)
+end
+
+def floor_collission_detected?
   @platform.contains?(@square.x3, @square.y3) ||
   @platform.contains?(@square.x4, @square.y4)
 end
 
-def colissions_detection
-  if colission_detected?
+def floor_collission_detection
+  if floor_collission_detected?
+    @square.y = @platform.y - 27
     @jumper_state = "ready"
-    @y_speed = 0
+    true
+  end
+end
+
+
+def wall_collission_right_detection
+  if wall_collission_right_detected?
+    true
+  end
+end
+
+def wall_collission_left_detection
+  if wall_collission_left_detected?
     true
   end
 end
 
 
 update do
-  colissions_detection
+  wall_collission_left_detection
+  wall_collission_right_detection
+  floor_collission_detection
   @square.x += @x_speed
   @square.y += @y_speed
   tick += 1
 
+  puts @jumper_state
+  puts @square.y
   on :key do |event|
-    if event.key == 'space' && @square.y > CEILING
+    if event.key == 'space'
       jump
     end
   end
@@ -70,7 +85,7 @@ update do
     @y_speed = GRAVITY 
   end
 
-  if @square.y == floor
+  if @square.y >= floor
     @jumper_state = 'ready'
     @y_speed = 0
   end
