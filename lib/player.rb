@@ -15,10 +15,10 @@ class Player
     Square.new(x: @x, y: @y, size: 25, color: 'blue')
   end
 
-  def move(obstacle)
-    if @direction == :right && @x < obstacle
+  def move(right: 100, left: 10)
+    if @direction == :right && @x < right
       @x += 2
-    elsif @direction == :left
+    elsif @direction == :left && @x > left
       @x -= 2
     end
   end

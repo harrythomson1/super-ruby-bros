@@ -1,5 +1,6 @@
 require 'ruby2d'
 require_relative 'player'
+require_relative 'platform'
 
 set title: "Super Ruby Bros", background: 'red'
 
@@ -8,10 +9,10 @@ set title: "Super Ruby Bros", background: 'red'
 # GRAVITY = 4
 # @jumper_state = "ready"
 
-obstacle = 100
+obstacle = 1000
 
 player = Player.new
-
+platform = Platform.new(200, 380)
 
 
 on :key_held do |event|
@@ -33,8 +34,11 @@ end
 
 update do
   clear
+  platform.draw
+  player.draw
   player.gravity
-  player.move(obstacle)
+  player.move(right: 100)
+  player.move(left: 10)
   player.jump
   player.checks_if_grounded
   player.draw
