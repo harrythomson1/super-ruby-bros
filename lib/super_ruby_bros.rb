@@ -1,5 +1,5 @@
 require 'ruby2d'
-require_relative 'test_class'
+require_relative 'player'
 
 set title: "Super Ruby Bros", background: 'red'
 
