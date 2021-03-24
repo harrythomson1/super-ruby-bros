@@ -13,6 +13,7 @@ obstacle = 1000
 
 player = Player.new
 platform = Platform.new(200, 380)
+platform2 = Platform.new(300, 400)
 
 
 on :key_held do |event|
@@ -35,13 +36,13 @@ end
 update do
   clear
   platform.draw
+  platform2.draw
   player.draw
   player.gravity
-  player.move(right: 100)
+  player.move(right: 10000)
   player.move(left: 10)
   player.jump
   player.checks_if_grounded
-  player.draw
   puts player.jumper_state
   puts player.x
 end

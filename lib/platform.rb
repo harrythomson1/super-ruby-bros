@@ -6,7 +6,7 @@ class Platform
   end
 
   def draw
-    Rectangle.new(x: @x, y: @y, width: 200, height: 50, color: 'green')
+    Rectangle.new(x: @x, y: @y, width: 200, height: 50, color: 'green', z: 5)
   end
 
 end
