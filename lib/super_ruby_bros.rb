@@ -11,40 +11,60 @@ set title: "Super Ruby Bros", background: 'red'
 
 obstacle = 1000
 
-player = Player.new
-platform = Platform.new(200, 380)
-platform2 = Platform.new(300, 400)
-
+@player = Player.new
+@platform = Platform.new(100, 380)
 
 on :key_held do |event|
-  if event.key == 'a'
-    player.direction = :left
-  elsif event.key == 'd'
-    player.direction = :right
-  elsif event.key == 'space' && player.jumper_state == 'grounded'
-    player.jumper_state = :jumping
+  if event.key == 'a' && collision_detected_right? != true 
+    @player.x -= 4
+  elsif event.key == 'd' && collision_detected_left? != true
+    @player.x += 4
+  elsif event.key == 'space' && @player.jumper_state == 'grounded'
+    @player.jumper_state = :jumping
   end
 end
 
 on :key_up do |event|
-  player.direction = nil
+  @player.direction = nil
   if event.key == 'space'
-    player.jumper_state = nil
+    @player.jumper_state = nil
+  end
+end
+
+def collision_detected_left?
+  if @platform.collision_left(@player.x2, @player.y2)
+    true
+  end
+end
+
+def collision_detected_right?
+  if @platform.collision_right(@player.x1, @player.y1)
+    true
+  end
+end
+
+def collision_detected_top?
+  if @platform.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.current_floor = @platform.y - (@platform.height / 2)
+  else
+    @player.current_floor = 400
   end
 end
 
 update do
   clear
-  platform.draw
-  platform2.draw
-  player.draw
-  player.gravity
-  player.move(right: 10000)
-  player.move(left: 10)
-  player.jump
-  player.checks_if_grounded
-  puts player.jumper_state
-  puts player.x
+  @player.draw
+  @platform.draw
+  collision_detected_left?
+  collision_detected_right?
+  collision_detected_top?
+  @player.gravity
+  @player.jump
+  @player.checks_if_grounded
+  puts "current floor: #{@player.current_floor}"
+  puts "player Y: #{@player.y}"
+  puts "jumper state: #{@player.jumper_state}"
+
 end
 
 # @platform = Rectangle.new(x: 200, y: 380, width: 200, height: 50, color: 'green')
