@@ -5,7 +5,7 @@ class Platform
   def initialize(x, y)
     @x = x
     @y = y
-    @height = 50
+    @height = 25
   end
 
   def draw

@@ -5,7 +5,7 @@ require_relative 'platform'
 set title: "Super Ruby Bros", background: 'red'
 
 @player = Player.new
-@platform = Platform.new(100, 380)
+@platform = Platform.new(250, 360)
 
 on :key_held do |event|
   if event.key == 'a' && collision_detected_right? != true 
@@ -38,9 +38,10 @@ end
 
 def collision_detected_top?
   if @platform.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.current_floor = @platform.y - (@platform.height / 2)
-  else
-    @player.current_floor = 400
+    # @player.current_floor = @platform.y - (@platform.height)
+    @player.jumper_state = 'grounded'
+  elsif @player.y <= 400 
+    @player.y += 4
   end
 end
 
@@ -51,7 +52,7 @@ update do
   collision_detected_left?
   collision_detected_right?
   collision_detected_top?
-  @player.gravity
+  # @player.gravity
   @player.jump
   @player.checks_if_grounded
   puts "current floor: #{@player.current_floor}"

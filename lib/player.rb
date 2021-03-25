@@ -23,12 +23,8 @@ class Player
     @y4 = @player.y4
   end
 
-  def jump_height
-    @current_floor - @jump_height
-  end
-
   def jump
-    if @jumper_state == :jumping && @y < (@current_floor - @jump_height)
+    if @y < (@current_floor - @jump_height)
       @jumper_state = nil
     elsif @jumper_state == :jumping && @y > (@current_floor - @jump_height)
       @y -= 10
@@ -36,11 +32,11 @@ class Player
     puts "jumpheight #{@current_floor - @jump_height}"
   end
 
-  def gravity
-    if @jumper_state != 'jumping' && @y < @current_floor
-      @y += 4
-    end
-  end
+  # def gravity
+  #   if @jumper_state != 'jumping' && @y < @current_floor 
+  #     @y += 4
+  #   end
+  # end
 
   def checks_if_grounded
     if @y >= @current_floor 
