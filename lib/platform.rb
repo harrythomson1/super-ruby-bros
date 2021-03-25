@@ -2,14 +2,17 @@ class Platform
   
   attr_reader :y, :height
 
-  def initialize(x, y)
+  def initialize(x:, y:, z: 0, height:, width:, color:)
     @x = x
     @y = y
-    @height = 25
+    @height = height
+    @width = width
+    @color = color
+    @z = z
   end
 
   def draw
-    @platform = Rectangle.new(x: @x, y: @y, width: 200, height: @height, color: 'green')
+    @platform = Rectangle.new(x: @x, y: @y, z: @z, width: @width, height: @height, color: @color)
   end
 
   def collision_left(x2, y2)

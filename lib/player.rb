@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4
+  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4, :platform_height
   
   def initialize
     @jumper_state = 'grounded'
@@ -9,6 +9,7 @@ class Player
     @x = 40
     @y = 400
     @current_floor = 400
+    @platform_height = 400
   end
 
   def draw
@@ -24,12 +25,12 @@ class Player
   end
 
   def jump
-    if @y < (@current_floor - @jump_height)
+    if @y < (@platform_height - @jump_height)
       @jumper_state = nil
-    elsif @jumper_state == :jumping && @y > (@current_floor - @jump_height)
-      @y -= 10
+    elsif @jumper_state == :jumping
+      @y -= 12
     end
-    puts "jumpheight #{@current_floor - @jump_height}"
+    puts "jumpheight #{@platform_height - @jump_height}"
   end
 
   # def gravity
