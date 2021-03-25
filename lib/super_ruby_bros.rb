@@ -6,7 +6,7 @@ set title: "Super Ruby Bros", background: 'red'
 
 @player = Player.new
 @platform = Platform.new(x: 250, y: 360, height: 25, width: 200, color: 'green')
-@platform2 = Platform.new(x: 0, y: 427, height: 25, width: 640, color: 'green')
+@platform2 = Platform.new(x: 0, y: 427, height: 25, width: 200, color: 'green')
 
 
 on :key_held do |event|
@@ -44,7 +44,7 @@ def collision_detected_top?
     @player.jumper_state = 'grounded'
     @player.y = @platform.y - (@platform.height + 0.01)
     @player.platform_height = @platform.y - @platform.height
-  elsif @player.y <= 400 
+  elsif @player.y
     @player.y += 4
   end
 end
