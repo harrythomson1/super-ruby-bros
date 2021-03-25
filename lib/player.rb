@@ -39,9 +39,9 @@ class Player
   #   end
   # end
 
-  def checks_if_grounded
-    if @y >= @current_floor 
-      @jumper_state = 'grounded'
+  def checks_if_falling
+    if @y > @platform_height
+      @jumper_state = nil
     end
   end
 

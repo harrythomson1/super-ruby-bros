@@ -40,18 +40,16 @@ end
 
 def collision_detected_top?
   if @platform.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    # @player.current_floor = @platform.y - (@platform.height)
     @player.jumper_state = 'grounded'
     @player.y = @platform.y - (@platform.height + 0.01)
     @player.platform_height = @platform.y - @platform.height
-  elsif @player.y
+  elsif
     @player.y += 4
   end
 end
 
 def collision_detected_top2?
   if @platform2.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    # @player.current_floor = @platform2.y - (@platform2.height)
     @player.jumper_state = 'grounded'
     @player.y = @platform2.y - (@platform2.height + 0.01)
     @player.platform_height = @platform2.y - @platform2.height
@@ -67,9 +65,8 @@ update do
   collision_detected_right?
   collision_detected_top?
   collision_detected_top2?
-  # @player.gravity
   @player.jump
-  @player.checks_if_grounded
+  @player.checks_if_falling
   puts "current floor: #{@player.current_floor}"
   puts "player Y: #{@player.y}"
   puts "jumper state: #{@player.jumper_state}"
