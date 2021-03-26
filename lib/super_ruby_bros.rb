@@ -2,16 +2,15 @@ require 'ruby2d'
 require_relative 'player'
 require_relative 'platform'
 require_relative 'goal'
+require_relative 'coin'
+require_relative 'new_platform'
 
 set title: "Super Ruby Bros", background: 'red'
 
-
+@level_one = LevelOne.new
 @goal = Goal.new
-@platform = Platform.new(x: 0, y: 430, height: 25, width: 200, color: 'green', z: 1)
-@platform2 = Platform.new(x: 250, y: 360, height: 25, width: 100, color: 'green', z: 1)
-@platform3 = Platform.new(x: 430, y: 300, height: 25, width: 250, color: 'green', z: 1)
-@platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'green', z: 1)
-@platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'green', z: 1)
+@coin2 = Coin.new(x: 470, y: 240)
+@coin = Coin.new(x: 60, y: 360)
 @player = Player.new
 
 on :key_held do |event|
@@ -33,48 +32,11 @@ on :key_up do |event|
   end
 end
 
-def collision_detected_top?
-  if @platform.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.jumper_state = 'grounded'
-    @player.y = @platform.y - (@platform.height + 0.01)
-    @player.platform_height = @platform.y - @platform.height
-  elsif
+def collision_detected?
+  if @level_one.collision(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.platform_height = @player.y
+  else
     @player.y += 4
-  end
-end
-
-def collision_detected_top2?
-  if @platform2.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.jumper_state = 'grounded'
-    @player.y = @platform2.y - (@platform2.height + 0.01)
-    @player.platform_height = @platform2.y - @platform2.height
-  end
-end
-
-def collision_detected_top3?
-  if @platform3.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.jumper_state = 'grounded'
-    @player.y = @platform3.y - (@platform3.height + 0.01)
-    @player.platform_height = @platform3.y - @platform3.height
-    puts "platform 4"
-
-  end
-end
-
-def collision_detected_top4?
-  if @platform4.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.jumper_state = 'grounded'
-    @player.y = @platform4.y - (@platform4.height + 0.01)
-    @player.platform_height = @platform4.y - @platform4.height
-    puts "platform 4"
-  end
-end
-
-def collision_detected_top5?
-  if @platform5.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.jumper_state = 'grounded'
-    @player.y = @platform5.y - (@platform5.height + 0.01)
-    @player.platform_height = @platform5.y - @platform5.height
   end
 end
 
@@ -84,28 +46,34 @@ def has_won?
   end
 end
 
+def coin_collision2?
+  if @coin2.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @coin2.y = 1000
+    @player.coins += 1
+    puts "1"
+  end
+end
+
+def coin_collision?
+  if @coin.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @coin.y = 1000
+    @player.coins += 1
+    puts "2"
+  end
+end
+
 update do
   clear
+  @level_one.draw
   @player.draw
-  @platform.draw
-  @platform2.draw
-  @platform3.draw
-  @platform4.draw
-  @platform5.draw
-  @goal.draw
-  collision_detected_top?
-  collision_detected_top2?
-  collision_detected_top3?
-  collision_detected_top4?
-  collision_detected_top5?
-  has_won?
+  collision_detected?
+  puts "platform height #{@player.platform_height}"
+  puts "player y #{@player.y}"
+  puts "jumper_state #{@player.jumper_state}"
+
   @player.reset
   @player.jump
-  @player.checks_if_falling
-  puts "current floor: #{@player.current_floor}"
-  puts "player Y: #{@player.y}"
-  puts "jumper state: #{@player.jumper_state}"
-
+  @player.grounded
 end
 
 show

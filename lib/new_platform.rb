@@ -1,0 +1,30 @@
+class LevelOne
+
+  def initialize
+  end
+  
+  def draw
+    @platform = Rectangle.new(x: 0, y: 430, height: 25, width: 200, color: 'white', z: 3)
+    @platform2 = Rectangle.new(x: 250, y: 360, height: 25, width: 100, color: 'white', z: 3)
+    @platform3 = Rectangle.new(x: 430, y: 300, height: 25, width: 250, color: 'white', z: 3)
+    @platform4 = Rectangle.new(x: 250, y: 250, height: 25, width: 100, color: 'white', z: 3)
+    @platform5 = Rectangle.new(x: 0, y: 190, height: 25, width: 200, color: 'white', z: 3)
+    @platform6 = Rectangle.new(x: 430, y: 190, height: 25, width: 200, color: 'white', z: 3)
+  end
+
+  def collision (x3, y3, x4, y4)
+    @platform.contains?(x3, y3) ||
+    @platform.contains?(x4, y4) ||    
+    @platform2.contains?(x3, y3) ||
+    @platform2.contains?(x4, y4) ||    
+    @platform3.contains?(x3, y3) ||
+    @platform3.contains?(x4, y4) ||    
+    @platform4.contains?(x3, y3) ||
+    @platform4.contains?(x4, y4) ||    
+    @platform5.contains?(x3, y3) ||
+    @platform5.contains?(x4, y4) ||    
+    @platform6.contains?(x3, y3) ||
+    @platform6.contains?(x4, y4) 
+  end
+
+end
