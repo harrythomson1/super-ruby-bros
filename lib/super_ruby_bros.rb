@@ -1,18 +1,23 @@
 require 'ruby2d'
 require_relative 'player'
 require_relative 'platform'
+require_relative 'goal'
 
 set title: "Super Ruby Bros", background: 'red'
 
-@player = Player.new
-@platform = Platform.new(x: 250, y: 360, height: 25, width: 200, color: 'green')
-@platform2 = Platform.new(x: 0, y: 427, height: 25, width: 200, color: 'green')
 
+@goal = Goal.new
+@platform = Platform.new(x: 0, y: 430, height: 25, width: 200, color: 'green', z: 1)
+@platform2 = Platform.new(x: 250, y: 360, height: 25, width: 100, color: 'green', z: 1)
+@platform3 = Platform.new(x: 430, y: 300, height: 25, width: 250, color: 'green', z: 1)
+@platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'green', z: 1)
+@platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'green', z: 1)
+@player = Player.new
 
 on :key_held do |event|
-  if event.key == 'a' && collision_detected_right? != true 
+  if event.key == 'a'
     @player.x -= 4
-  elsif event.key == 'd' && collision_detected_left? != true
+  elsif event.key == 'd'
     @player.x += 4
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
@@ -25,18 +30,6 @@ on :key_up do |event|
   @player.direction = nil
   if event.key == 'space'
     @player.jumper_state = nil
-  end
-end
-
-def collision_detected_left?
-  if @platform.collision_left(@player.x2, @player.y2)
-    true
-  end
-end
-
-def collision_detected_right?
-  if @platform.collision_right(@player.x1, @player.y1)
-    true
   end
 end
 
@@ -58,15 +51,54 @@ def collision_detected_top2?
   end
 end
 
+def collision_detected_top3?
+  if @platform3.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.jumper_state = 'grounded'
+    @player.y = @platform3.y - (@platform3.height + 0.01)
+    @player.platform_height = @platform3.y - @platform3.height
+    puts "platform 4"
+
+  end
+end
+
+def collision_detected_top4?
+  if @platform4.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.jumper_state = 'grounded'
+    @player.y = @platform4.y - (@platform4.height + 0.01)
+    @player.platform_height = @platform4.y - @platform4.height
+    puts "platform 4"
+  end
+end
+
+def collision_detected_top5?
+  if @platform5.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.jumper_state = 'grounded'
+    @player.y = @platform5.y - (@platform5.height + 0.01)
+    @player.platform_height = @platform5.y - @platform5.height
+  end
+end
+
+def has_won?
+  if @goal.collision(@player.x3, @player.y3, @player.x4, @player.y4)
+    Text.new("Winner")
+  end
+end
+
 update do
   clear
   @player.draw
   @platform.draw
   @platform2.draw
-  collision_detected_left?
-  collision_detected_right?
+  @platform3.draw
+  @platform4.draw
+  @platform5.draw
+  @goal.draw
   collision_detected_top?
   collision_detected_top2?
+  collision_detected_top3?
+  collision_detected_top4?
+  collision_detected_top5?
+  has_won?
   @player.reset
   @player.jump
   @player.checks_if_falling

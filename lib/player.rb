@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4, :platform_height, :reset
+  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x3, :x4, :y3, :y4, :platform_height, :reset
   
   def initialize
     @jumper_state = 'grounded'
@@ -15,12 +15,8 @@ class Player
 
   def draw
     @player = Square.new(x: @x, y: @y, size: 25, color: 'blue')
-    @x1 = @player.x1
-    @x2 = @player.x2
     @x3 = @player.x3
     @x4 = @player.x4
-    @y1 = @player.y1
-    @y2 = @player.y2
     @y3 = @player.y3
     @y4 = @player.y4
   end
