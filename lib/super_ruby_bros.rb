@@ -13,6 +13,7 @@ set title: "Super Ruby Bros"
 @platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'white', z: 1)
 @platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'white', z: 1)
 @player = Player.new
+@hero_img = Image.new('./assets/hero_1_png.png', z:3)
 
 
 
@@ -42,10 +43,8 @@ set title: "Super Ruby Bros"
 on :key_held do |event|
   if event.key == 'a'
     @player.x -= 4
-    @hero.play animation: :walk, loop: true, flip: :horizontal
   elsif event.key == 'd'
     @player.x += 4
-    @hero.play animation: :walk, loop: true
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
   elsif event.key == 'r'
@@ -107,13 +106,19 @@ end
 
 def has_won?
   if @goal.collision(@player.x3, @player.y3, @player.x4, @player.y4)
-    Text.new("Winner", z:10)
+    Text.new("Winner", z:3)
   end
 end
 
 update do
   clear
-  background = Image.new('./assets/background (1).png')
+  background = Image.new('./assets/background (1).png', z: 2)
+  box_1 = Image.new('./assets/00.png',z: 2, x: 0, y: 430, height: 25, width: 200, )
+  box_2 = Image.new('./assets/00.png',z: 2, x: 250, y: 360, height: 25, width: 100, )
+  box_3 = Image.new('./assets/00.png',z: 2, x: 430, y: 300, height: 25, width: 250 )
+  box_4 = Image.new('./assets/00.png',z: 2, x: 250, y: 250, height: 25, width: 100 )
+  box_5 = Image.new('./assets/00.png',z: 2, x: 0, y: 190, height: 25, width: 200 )
+  @hero_img = Image.new('./assets/hero_1_png.png',z: 2)
   @coin.play
   @player.draw
   @platform.draw
@@ -131,8 +136,8 @@ update do
   @player.reset
   @player.jump
   @player.checks_if_falling
-  @hero.x = @player.x 
-  @hero.y = (@player.y - 54)
+  @hero_img.x = @player.x 
+  @hero_img.y = @player.y - 35
 
   # puts "current floor: #{@player.current_floor}"
   # puts "jumper state: #{@player.jumper_state}"

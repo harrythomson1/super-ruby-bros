@@ -16,7 +16,7 @@ class Player
 
   
   def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'red', z:0)
+    @player = Square.new(x: @x, y: @y, size: 25, color: 'red', z:3)
     @x3 = @player.x3
     @x4 = @player.x4
     @y3 = @player.y3
