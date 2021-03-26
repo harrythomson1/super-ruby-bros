@@ -3,22 +3,50 @@ require_relative 'player'
 require_relative 'platform'
 require_relative 'goal'
 
-set title: "Super Ruby Bros", background: 'red'
 
+set title: "Super Ruby Bros"
+background = Image.new('./assets/background (1).png',z:1)
 
 @goal = Goal.new
-@platform = Platform.new(x: 0, y: 430, height: 25, width: 200, color: 'green', z: 1)
-@platform2 = Platform.new(x: 250, y: 360, height: 25, width: 100, color: 'green', z: 1)
-@platform3 = Platform.new(x: 430, y: 300, height: 25, width: 250, color: 'green', z: 1)
-@platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'green', z: 1)
-@platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'green', z: 1)
+@platform = Platform.new(x: 0, y: 430, height: 25, width: 200, color: 'white', z: 1)
+@platform2 = Platform.new(x: 250, y: 360, height: 25, width: 100, color: 'white', z: 1)
+@platform3 = Platform.new(x: 430, y: 300, height: 25, width: 250, color: 'white', z: 1)
+@platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'white', z: 1)
+@platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'white', z: 1)
 @player = Player.new
+
+
+
+  @hero = Sprite.new(
+    './assets/hero.png',  
+    width: 33,
+    height: 84,
+    clip_width: 33,
+    y: 350,
+    x: 40,
+    z: 3,
+    animations:{
+      walk: 1..5
+    }
+   )
+
+     @coin = Sprite.new(
+    './assets/coin.png',  
+    clip_width: 42,
+    y: 85,
+    x: 5,
+    z: 3,
+    time: 300, 
+    loop: true
+   )
 
 on :key_held do |event|
   if event.key == 'a'
     @player.x -= 4
+    @hero.play animation: :walk, loop: true, flip: :horizontal
   elsif event.key == 'd'
     @player.x += 4
+    @hero.play animation: :walk, loop: true
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
   elsif event.key == 'r'
@@ -28,6 +56,7 @@ end
 
 on :key_up do |event|
   @player.direction = nil
+  @hero.stop
   if event.key == 'space'
     @player.jumper_state = nil
   end
@@ -61,6 +90,8 @@ def collision_detected_top3?
   end
 end
 
+
+
 def collision_detected_top4?
   if @platform4.collision_top(@player.x3, @player.y3, @player.x4, @player.y4)
     @player.jumper_state = 'grounded'
@@ -80,12 +111,12 @@ end
 
 def has_won?
   if @goal.collision(@player.x3, @player.y3, @player.x4, @player.y4)
-    Text.new("Winner")
+    Text.new("Winner", z:10)
   end
 end
 
 update do
-  clear
+  @coin.play
   @player.draw
   @platform.draw
   @platform2.draw
@@ -102,9 +133,13 @@ update do
   @player.reset
   @player.jump
   @player.checks_if_falling
-  puts "current floor: #{@player.current_floor}"
-  puts "player Y: #{@player.y}"
-  puts "jumper state: #{@player.jumper_state}"
+  @hero.x = @player.x 
+  @hero.y = (@player.y - 54)
+
+  # puts "current floor: #{@player.current_floor}"
+    puts "player Y: #{@player.y}"
+    puts "player X: #{@player.x}"
+  # puts "jumper state: #{@player.jumper_state}"
 
 end
 

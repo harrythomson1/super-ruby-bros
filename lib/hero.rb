@@ -1,27 +1,31 @@
-class Player
-
-  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x3, :x4, :y3, :y4, :platform_height, :reset
+class Hero 
+  attr_accessor :z, :y, :x, :clip_width, :width, :height, :direction, :jumper_state, :current_floor, :platform_height, :reset
   
   def initialize
     @jumper_state = 'grounded'
     @jump_height = 75
     @direction = nil
     @x = 40
-    @y = 400
-    @current_floor = 400
-    @platform_height = 400
+    @y = 350
+    @z = 3
+    @current_floor = 350
+    @platform_height = 350
     @reset = false
   end
 
-
   
-  def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'red', z:0)
-    @x3 = @player.x3
-    @x4 = @player.x4
-    @y3 = @player.y3
-    @y4 = @player.y4
+  def dog
+    Sprite.new(
+    './assets/hero.png',  
+    width: 33,
+    height: 84,
+    clip_width: 33,
+    y: @y,
+    x: @x,
+    z: @z
+   )
   end
+
 
   def reset
     if @reset
