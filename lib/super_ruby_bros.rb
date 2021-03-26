@@ -16,6 +16,8 @@ on :key_held do |event|
     @player.x += 4
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
+  elsif event.key == 'r'
+    @player.reset = true
   end
 end
 
@@ -65,6 +67,7 @@ update do
   collision_detected_right?
   collision_detected_top?
   collision_detected_top2?
+  @player.reset
   @player.jump
   @player.checks_if_falling
   puts "current floor: #{@player.current_floor}"

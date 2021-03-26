@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4, :platform_height
+  attr_accessor :direction, :jumper_state, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4, :platform_height, :reset
   
   def initialize
     @jumper_state = 'grounded'
@@ -10,6 +10,7 @@ class Player
     @y = 400
     @current_floor = 400
     @platform_height = 400
+    @reset = false
   end
 
   def draw
@@ -22,6 +23,14 @@ class Player
     @y2 = @player.y2
     @y3 = @player.y3
     @y4 = @player.y4
+  end
+
+  def reset
+    if @reset
+      @x = 40
+      @y = 405
+      @reset = false
+    end
   end
 
   def jump
