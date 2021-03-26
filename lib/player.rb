@@ -37,7 +37,6 @@ class Player
     elsif @jumper_state == :jumping
       @y -= 12
     end
-    puts "jumpheight #{@platform_height - @jump_height}"
   end
 
   # def gravity

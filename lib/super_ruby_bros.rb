@@ -5,7 +5,6 @@ require_relative 'goal'
 
 
 set title: "Super Ruby Bros"
-background = Image.new('./assets/background (1).png',z:1)
 
 @goal = Goal.new
 @platform = Platform.new(x: 0, y: 430, height: 25, width: 200, color: 'white', z: 1)
@@ -30,12 +29,12 @@ background = Image.new('./assets/background (1).png',z:1)
     }
    )
 
-     @coin = Sprite.new(
+  @coin = Sprite.new(
     './assets/coin.png',  
     clip_width: 42,
     y: 85,
     x: 5,
-    z: 3,
+    z: 10,
     time: 300, 
     loop: true
    )
@@ -85,8 +84,6 @@ def collision_detected_top3?
     @player.jumper_state = 'grounded'
     @player.y = @platform3.y - (@platform3.height + 0.01)
     @player.platform_height = @platform3.y - @platform3.height
-    puts "platform 4"
-
   end
 end
 
@@ -97,7 +94,6 @@ def collision_detected_top4?
     @player.jumper_state = 'grounded'
     @player.y = @platform4.y - (@platform4.height + 0.01)
     @player.platform_height = @platform4.y - @platform4.height
-    puts "platform 4"
   end
 end
 
@@ -116,6 +112,8 @@ def has_won?
 end
 
 update do
+  clear
+  background = Image.new('./assets/background (1).png')
   @coin.play
   @player.draw
   @platform.draw
@@ -137,8 +135,6 @@ update do
   @hero.y = (@player.y - 54)
 
   # puts "current floor: #{@player.current_floor}"
-    puts "player Y: #{@player.y}"
-    puts "player X: #{@player.x}"
   # puts "jumper state: #{@player.jumper_state}"
 
 end
