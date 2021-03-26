@@ -13,32 +13,10 @@ set title: "Super Ruby Bros"
 @platform4 = Platform.new(x: 250, y: 250, height: 25, width: 100, color: 'white', z: 1)
 @platform5 = Platform.new(x: 0, y: 190, height: 25, width: 200, color: 'white', z: 1)
 @player = Player.new
-@hero_img = Image.new('./assets/hero_1_png.png', z:3)
 
 
 
-  @hero = Sprite.new(
-    './assets/hero.png',  
-    width: 33,
-    height: 84,
-    clip_width: 33,
-    y: 350,
-    x: 40,
-    z: 3,
-    animations:{
-      walk: 1..5
-    }
-   )
 
-  @coin = Sprite.new(
-    './assets/coin.png',  
-    clip_width: 42,
-    y: 85,
-    x: 5,
-    z: 10,
-    time: 300, 
-    loop: true
-   )
 
 on :key_held do |event|
   if event.key == 'a'
@@ -54,7 +32,6 @@ end
 
 on :key_up do |event|
   @player.direction = nil
-  @hero.stop
   if event.key == 'space'
     @player.jumper_state = nil
   end
@@ -112,14 +89,13 @@ end
 
 update do
   clear
-  background = Image.new('./assets/background (1).png', z: 2)
-  box_1 = Image.new('./assets/00.png',z: 2, x: 0, y: 430, height: 25, width: 200, )
-  box_2 = Image.new('./assets/00.png',z: 2, x: 250, y: 360, height: 25, width: 100, )
-  box_3 = Image.new('./assets/00.png',z: 2, x: 430, y: 300, height: 25, width: 250 )
-  box_4 = Image.new('./assets/00.png',z: 2, x: 250, y: 250, height: 25, width: 100 )
-  box_5 = Image.new('./assets/00.png',z: 2, x: 0, y: 190, height: 25, width: 200 )
-  @hero_img = Image.new('./assets/hero_1_png.png',z: 2)
-  @coin.play
+  background = Image.new('../assets/background (1).png', z: 2)
+  box_1 = Image.new('../assets/00.png',z: 2, x: 0, y: 430, height: 25, width: 200, )
+  box_2 = Image.new('../assets/00.png',z: 2, x: 250, y: 360, height: 25, width: 100, )
+  box_3 = Image.new('../assets/00.png',z: 2, x: 430, y: 300, height: 25, width: 250 )
+  box_4 = Image.new('../assets/00.png',z: 2, x: 250, y: 250, height: 25, width: 100 )
+  box_5 = Image.new('../assets/00.png',z: 2, x: 0, y: 190, height: 25, width: 200 )
+  @hero_img = Image.new('../assets/hero_1_png.png',z: 2)
   @player.draw
   @platform.draw
   @platform2.draw
@@ -136,8 +112,12 @@ update do
   @player.reset
   @player.jump
   @player.checks_if_falling
-  @hero_img.x = @player.x 
+  @hero_img.x = @player.x - 5
   @hero_img.y = @player.y - 35
+  if @player.jumper_state == 'grounded'
+    @player.jumper_state = :jumping
+  end
+
 
   # puts "current floor: #{@player.current_floor}"
   # puts "jumper state: #{@player.jumper_state}"

@@ -4,7 +4,7 @@ class Player
   
   def initialize
     @jumper_state = 'grounded'
-    @jump_height = 75
+    @jump_height = 55
     @direction = nil
     @x = 40
     @y = 400
@@ -16,7 +16,7 @@ class Player
 
   
   def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'red', z:3)
+    @player = Square.new(x: @x, y: @y, size: 25, color: 'red', z:0)
     @x3 = @player.x3
     @x4 = @player.x4
     @y3 = @player.y3
