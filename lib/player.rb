@@ -46,15 +46,18 @@ class Player
     end
   end
 
-def grounded
+def checks_if_falling
   if @platform_height == @y && @touching_platform == true
     @jumper_state = 'grounded'
+  elsif @y > @platform_height
+    @jumper_state = nil
   end
 end
 
-def checks_if_falling
-  if @y > @platform_height
-    @jumper_state = nil
+def fall_death
+  if @y > Window.height
+    @lives -= 1
+    @reset = true
   end
 end
 

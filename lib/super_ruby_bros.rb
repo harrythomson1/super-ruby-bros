@@ -100,8 +100,8 @@ update do
     has_won?
     @player.reset
     @player.jump
-    @player.grounded
     @player.checks_if_falling
+    @player.fall_death
   else
     game_over
   end
