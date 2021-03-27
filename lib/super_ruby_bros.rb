@@ -20,8 +20,6 @@ on :key_held do |event|
     @player.x += 4
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
-  elsif event.key == 'r'
-    @player.reset = true
   end
 end
 
