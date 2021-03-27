@@ -4,12 +4,12 @@ class LevelOne
   end
   
   def draw
-    @platform = Rectangle.new(x: 0, y: 430, height: 25, width: 200, color: 'white', z: 3)
-    @platform2 = Rectangle.new(x: 250, y: 360, height: 25, width: 100, color: 'white', z: 3)
-    @platform3 = Rectangle.new(x: 430, y: 300, height: 25, width: 250, color: 'white', z: 3)
-    @platform4 = Rectangle.new(x: 250, y: 250, height: 25, width: 100, color: 'white', z: 3)
-    @platform5 = Rectangle.new(x: 0, y: 190, height: 25, width: 200, color: 'white', z: 3)
-    @platform6 = Rectangle.new(x: 430, y: 190, height: 25, width: 200, color: 'white', z: 3)
+    @platform = Rectangle.new(x: 0, y: 430, height: 10, width: 200, color: 'green', z: 1)
+    @platform2 = Rectangle.new(x: 250, y: 360, height: 10, width: 100, color: 'green', z: 1)
+    @platform3 = Rectangle.new(x: 430, y: 300, height: 10, width: 250, color: 'green', z: 1)
+    @platform4 = Rectangle.new(x: 250, y: 250, height: 10, width: 100, color: 'green', z: 1)
+    @platform5 = Rectangle.new(x: 0, y: 190, height: 10, width: 200, color: 'green', z: 1)
+    @platform6 = Rectangle.new(x: 440, y: 190, height: 10, width: 200, color: 'green', z: 1)
   end
 
   def collision (x3, y3, x4, y4)
