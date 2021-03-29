@@ -151,6 +151,7 @@ update do
     @player.draw
     @level_two_enemies.draw
     @level_two_enemies.move_enemy_1
+    @level_two_enemies.move_enemy_2
     @level_two_enemies.enemy_movement
     level_two_enemy_collision?
     level_two_collision_detected?
