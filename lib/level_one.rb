@@ -1,7 +1,4 @@
 class LevelOne
-
-  def initialize
-  end
   
   def draw
     @platform = Rectangle.new(x: 0, y: 430, height: 10, width: 200, color: 'green', z: 1)
@@ -25,6 +22,21 @@ class LevelOne
     @platform5.contains?(x4, y4) ||    
     @platform6.contains?(x3, y3) ||
     @platform6.contains?(x4, y4) 
+  end
+
+  def collision_bottom (x1, y1, x2, y2)
+    @platform.contains?(x1, y1) ||
+    @platform.contains?(x2, y2) ||    
+    @platform2.contains?(x1, y1) ||
+    @platform2.contains?(x2, y2) ||    
+    @platform3.contains?(x1, y1) ||
+    @platform3.contains?(x2, y2) ||    
+    @platform4.contains?(x1, y1) ||
+    @platform4.contains?(x2, y2) ||    
+    @platform5.contains?(x1, y1) ||
+    @platform5.contains?(x2, y2) ||    
+    @platform6.contains?(x1, y1) ||
+    @platform6.contains?(x2, y2) 
   end
 
 end

@@ -56,9 +56,13 @@ end
 
 def fall_death
   if @y > Window.height
-    @lives -= 1
-    @reset = true
+    lose_life
   end
+end
+
+def lose_life
+  @reset = true
+  @lives -= 1
 end
 
 end
