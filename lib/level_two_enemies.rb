@@ -6,7 +6,7 @@ class LevelTwoEnemies
     @x1_speed = 0
     @y2 = (Window.height - 270)
     @y2_speed = 0
-    @y3 = (Window.height - 420)
+    @y3 = (Window.height - 450)
     @y3_speed = 0
   end
 
@@ -33,14 +33,12 @@ class LevelTwoEnemies
   end
 
   def move_enemy_3
-    if @y3 == Window.height - 420
-      @y3_speed = 2
+    if @y3 == Window.height - 450
+      @y3_speed = 4
     elsif @y3 == Window.height - 250
-      @y3_speed = -2
+      @y3_speed = -4
     end
   end
-
-  # 13 + 14
 
   def enemy_movement
     @x1 += @x1_speed
