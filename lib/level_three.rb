@@ -58,7 +58,7 @@ class LevelThree
         @platform3.contains?(x1, y1) ||
         @platform3.contains?(x2, y2) ||
         @platform4.contains?(x1, y1) ||
-        @platform4.contains?(x2, y2) 
+        @platform4.contains?(x2, y2) ||
         @platform5.contains?(x1, y1) ||
         @platform5.contains?(x2, y2) ||    
         @platform6.contains?(x1, y1) ||
@@ -74,7 +74,7 @@ class LevelThree
         @platform11.contains?(x1, y1) ||
         @platform11.contains?(x2, y2) ||
         @platform12.contains?(x1, y1) ||
-        @platform12.contains?(x2, y2)
+        @platform12.contains?(x2, y2) ||
         @platform13.contains?(x1, y1) ||
         @platform13.contains?(x2, y2) ||
         @platform14.contains?(x1, y1) ||
