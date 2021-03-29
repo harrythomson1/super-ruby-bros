@@ -14,5 +14,10 @@ class LevelTwoEnemies
       x1_speed = -2
     elsif @x1 == 200
       x1_speed = 2
+    end
+  end
+
+  def enemy_movement
+    @x1 += @x1_speed
   end
 end
