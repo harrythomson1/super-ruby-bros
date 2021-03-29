@@ -3,6 +3,7 @@ require_relative 'player'
 require_relative 'goal'
 require_relative 'level_one_coins'
 require_relative 'level_one_enemies'
+require_relative 'level_two_enemies'
 require_relative 'level_one'
 require_relative 'level_two'
 
@@ -17,6 +18,7 @@ GRAVITY = 7
 @level_one_coins = LevelOneCoins.new
 @player = Player.new
 @level_one_enemies = LevelOneEnemies.new
+@level_two_enemies = LevelTwoEnemies.new
 
 @stage_one = false
 @stage_two = true
@@ -139,6 +141,9 @@ update do
   elsif @player.lives > 0 && @stage_two == true
     @level_two.draw
     @player.draw
+    @level_two_enemies.draw
+    @level_two_enemies.move_enemy_1
+    @level_two_enemies.enemy_movement
     level_two_collision_detected?
     level_two_collision_detected_bottom?
     player_methods
