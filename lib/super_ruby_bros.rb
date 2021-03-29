@@ -154,15 +154,27 @@ update do
     level_one_collision_detected_bottom?
     player_methods
   elsif level_one == false
-    @hero = Image.new('.\super-ruby-bros\assets\hero.png', z: 4)
+    @hero = Image.new('.\super-ruby-bros\assets\hero.png', z: 5)
     background = Image.new('.\super-ruby-bros\assets\bg.png', z: 3)
+    box_1 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 550)
+    box_2 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 350, y: Window.height - 175)
+    box_3 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4,x: 125, y: Window.height - 250)
+    box_4 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150)
+    box_5 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 10)
+    box_6 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 150, y: Window.height - 210)
+    box_7 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335)
+    box_8 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340)
+    box_9 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: 150, y: Window.height - 85)
+    box_10 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
+    box_11 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
+    box_12 = Image.new('.\super-ruby-bros\assets\wood.png', z: 4, x: 750, y: Window.height - 30 )
     @level_three.draw
     @player.draw
     level_three_collision_detected?
     level_three_collision_detected_bottom?
     player_methods
     @hero.x = @player.x - 5
-    @hero.y = @player.y - 34
+    @hero.y = @player.y - 30
 
 
  

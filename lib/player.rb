@@ -16,7 +16,7 @@ class Player
   end
 
   def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'blue', z:0)
+    @player = Square.new(x: @x, y: @y, size: 30, color: 'blue', z:0)
     @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 750,color: 'black')
     @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 750, y:40, color: 'black')
     @x1 = @player.x1
