@@ -24,57 +24,10 @@ def initialize
     Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 1)]
 end
 
-  def draw
-    @platforms.each do |platform|
-      platform
-    end
+def add_platforms
+  @platforms.each do |platform|
+    platform.add
   end
+end
 
-  def collision (x3, y3, x4, y4)
-    @platforms.each do |platform|
-      platform.contains?(x3, y3) ||
-      platform.contains?(x4, y4)
-    end
-  end
-
-  def collision_bottom (x1, y1, x2, y2)
-    @platform.contains?(x1, y1) ||
-    @platform.contains?(x2, y2) ||
-    @platform2.contains?(x1, y1) ||
-    @platform2.contains?(x2, y2) ||
-    @platform3.contains?(x1, y1) ||
-    @platform3.contains?(x2, y2) ||
-    @platform4.contains?(x1, y1) ||
-    @platform4.contains?(x2, y2) ||
-    @platform5.contains?(x1, y1) ||
-    @platform5.contains?(x2, y2) ||
-    @platform6.contains?(x1, y1) ||
-    @platform6.contains?(x2, y2) ||
-    @platform7.contains?(x1, y1) ||
-    @platform7.contains?(x2, y2) ||
-    @platform8.contains?(x1, y1) ||
-    @platform8.contains?(x2, y2) ||
-    @platform9.contains?(x1, y1) ||
-    @platform9.contains?(x2, y2) ||
-    @platform10.contains?(x1, y1) ||
-    @platform10.contains?(x2, y2) ||
-    @platform11.contains?(x1, y1) ||
-    @platform11.contains?(x2, y2) ||
-    @platform12.contains?(x1, y1) ||
-    @platform12.contains?(x2, y2) ||
-    @platform13.contains?(x1, y1) ||
-    @platform13.contains?(x2, y2) ||
-    @platform14.contains?(x1, y1) ||
-    @platform14.contains?(x2, y2) ||
-    @platform15.contains?(x1, y1) ||
-    @platform15.contains?(x2, y2) ||
-    @platform16.contains?(x1, y1) ||
-    @platform16.contains?(x2, y2) ||
-    @platform17.contains?(x1, y1) ||
-    @platform17.contains?(x2, y2) ||
-    @platform18.contains?(x1, y1) ||
-    @platform18.contains?(x2, y2) ||
-    @platform19.contains?(x1, y1) ||
-    @platform19.contains?(x2, y2)
-  end
 end

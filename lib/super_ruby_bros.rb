@@ -57,20 +57,22 @@ def level_one_collision_detected_bottom?
 end
 
 def level_two_collision_detected?
-  if @level_two.collision(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.platform_height = @player.y
-    @player.touching_platform = true
-    puts "touching"
-  else
-    @player.touching_platform = false
-    @player.y += GRAVITY
-    puts "not touching"
+  @level_two.platforms.each do |platform|
+    if platform.contains?(@player.x3, @player.y3) || platform.contains?(@player.x4, @player.y4)
+      @player.platform_height = @player.y
+      @player.y -= 7
+      @player.touching_platform = true
+    elsif platform.contains?(@player.x1, @player.y1) || platform.contains?(@player.x2, @player.y2)
+      @player.jumper_state = nil
+    end
   end
 end
 
 def level_two_collision_detected_bottom?
-  if @level_two.collision_bottom(@player.x1, @player.y1, @player.x2, @player.y2)
-    @player.jumper_state = nil
+  @level_two.platforms.each do |platform|
+    if platform.contains?(@player.x1, @player.y1) || platform.contains?(@player.x2, @player.y2)
+      @player.jumper_state = nil
+    end
   end
 end
 
@@ -150,7 +152,7 @@ update do
     has_won?
     player_methods
   elsif @player.lives > 0 && @stage_two == true
-    @level_two.draw
+    @level_two.add_platforms
     @player.draw
     @level_two_enemies.draw
     @level_two_enemies.move_enemy_1
@@ -158,11 +160,8 @@ update do
     @level_two_enemies.move_enemy_3
     @level_two_enemies.enemy_movement
     level_two_enemy_collision?
-    @level_two.platforms.each do |platform|
-      platform.add
-    end
     level_two_collision_detected?
-    # level_two_collision_detected_bottom?
+    @player.gravity
     player_methods
   else
     game_over
