@@ -20,8 +20,8 @@ GRAVITY = 7
 @level_one_enemies = LevelOneEnemies.new
 @level_two_enemies = LevelTwoEnemies.new
 
-@stage_one = true
-@stage_two = false
+@stage_one = false
+@stage_two = true
 
 on :key_held do |event|
   if event.key == 'a'
@@ -60,9 +60,11 @@ def level_two_collision_detected?
   if @level_two.collision(@player.x3, @player.y3, @player.x4, @player.y4)
     @player.platform_height = @player.y
     @player.touching_platform = true
+    puts "touching"
   else
     @player.touching_platform = false
     @player.y += GRAVITY
+    puts "not touching"
   end
 end
 
@@ -156,8 +158,11 @@ update do
     @level_two_enemies.move_enemy_3
     @level_two_enemies.enemy_movement
     level_two_enemy_collision?
+    @level_two.platforms.each do |platform|
+      platform.add
+    end
     level_two_collision_detected?
-    level_two_collision_detected_bottom?
+    # level_two_collision_detected_bottom?
     player_methods
   else
     game_over
