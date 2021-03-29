@@ -13,12 +13,13 @@ GRAVITY = 7
 
 @level_one = LevelOne.new
 @level_two = LevelTwo.new
-@goal = Goal.new
+@level_one_goal = Goal.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475)
 @level_one_coins = LevelOneCoins.new
 @player = Player.new
 @level_one_enemies = LevelOneEnemies.new
 
-level_one = true
+@stage_one = false
+@stage_two = true
 
 on :key_held do |event|
   if event.key == 'a'
@@ -70,8 +71,9 @@ def level_two_collision_detected_bottom?
 end
 
 def has_won?
-  if @goal.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    Text.new("Winner")
+  if @level_one_goal.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @stage_one = false
+    @stage_two = true
   end
 end
 
@@ -118,9 +120,10 @@ end
 
 update do
   clear
-  if @player.lives > 0 && level_one == true
+  if @player.lives > 0 && @stage_one == true
     @level_one.draw
     @player.draw
+    @level_one_goal.draw
     @level_one_enemies.draw
     @level_one_coins.draw
     @level_one_enemies.move_enemy_1
@@ -131,21 +134,13 @@ update do
     enemy_collision?
     level_one_collision_detected?
     level_one_collision_detected_bottom?
+    has_won?
     player_methods
-  elsif level_one == false
+  elsif @player.lives > 0 && @stage_two == true
     @level_two.draw
-    @coins.draw
-    @goal.draw
     @player.draw
-    enemy_collision?
-    @enemies.move_enemy_1
-    @enemies.enemy_movement
-    coin_collision?
-    coin_collision2?
-    coin_collision3?
     level_two_collision_detected?
     level_two_collision_detected_bottom?
-    has_won?
     player_methods
   else
     game_over
