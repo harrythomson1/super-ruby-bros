@@ -17,6 +17,9 @@ class LevelTwo
     @platform14 = Rectangle.new(x: 175, y: Window.height - 400, height: 10, width: 50, color: 'green', z: 1)
     @platform15 = Rectangle.new(x: 320, y: Window.height - 350, height: 10, width: 30, color: 'green', z: 1)
     @platform16 = Rectangle.new(x: 410, y: Window.height - 430, height: 10, width: 50, color: 'green', z: 1)
+    @platform17 = Rectangle.new(x: 550, y: Window.height - 470, height: 10, width: 30, color: 'green', z: 1)
+    @platform18 = Rectangle.new(x: 610, y: Window.height - 550, height: 10, width: 30, color: 'green', z: 1)
+    @platform19 = Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 1)
   end
 
   def collision (x3, y3, x4, y4)
@@ -51,7 +54,13 @@ class LevelTwo
     @platform15.contains?(x3, y3) ||
     @platform15.contains?(x4, y4) ||
     @platform16.contains?(x3, y3) ||
-    @platform16.contains?(x4, y4)
+    @platform16.contains?(x4, y4) ||
+    @platform17.contains?(x3, y3) ||
+    @platform17.contains?(x4, y4) ||
+    @platform18.contains?(x3, y3) ||
+    @platform18.contains?(x4, y4) ||
+    @platform19.contains?(x3, y3) ||
+    @platform19.contains?(x4, y4)
   end
 
   def collision_bottom (x1, y1, x2, y2)
@@ -86,6 +95,12 @@ class LevelTwo
     @platform15.contains?(x1, y1) ||
     @platform15.contains?(x2, y2) ||
     @platform16.contains?(x1, y1) ||
-    @platform16.contains?(x2, y2)
+    @platform16.contains?(x2, y2) ||
+    @platform17.contains?(x1, y1) ||
+    @platform17.contains?(x2, y2) ||
+    @platform18.contains?(x1, y1) ||
+    @platform18.contains?(x2, y2) ||
+    @platform19.contains?(x1, y1) ||
+    @platform19.contains?(x2, y2)
   end
 end
