@@ -5,26 +5,31 @@ require_relative 'level_one_coins'
 require_relative 'level_one_enemies'
 require_relative 'level_one'
 require_relative 'level_two'
+require_relative 'level_three'
 
 
-set title: "Super Ruby Bros", background: 'red', width: 900, height: 700
+set title: "Super Ruby Bros", width: 900, height: 700
 
 GRAVITY = 7
 
 @level_one = LevelOne.new
 @level_two = LevelTwo.new
+@level_three = LevelThree.new
 @goal = Goal.new
 @level_one_coins = LevelOneCoins.new
 @player = Player.new
 @level_one_enemies = LevelOneEnemies.new
 
-level_one = true
+level_one = false
+
 
 on :key_held do |event|
   if event.key == 'a'
     @player.x -= 4
+    @hero.x -= 4 
   elsif event.key == 'd'
     @player.x += 4
+    @hero.x += 4
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
   end
@@ -65,6 +70,22 @@ end
 
 def level_two_collision_detected_bottom?
   if @level_two.collision_bottom(@player.x1, @player.y1, @player.x2, @player.y2)
+    @player.jumper_state = nil
+  end
+end
+
+def level_three_collision_detected?
+  if @level_three.collision(@player.x3, @player.y3, @player.x4, @player.y4)
+    @player.platform_height = @player.y
+    @player.touching_platform = true
+  else
+    @player.touching_platform = false
+    @player.y += GRAVITY
+  end
+end
+
+def level_three_collision_detected_bottom?
+  if @level_three.collision_bottom(@player.x1, @player.y1, @player.x2, @player.y2)
     @player.jumper_state = nil
   end
 end
@@ -133,20 +154,18 @@ update do
     level_one_collision_detected_bottom?
     player_methods
   elsif level_one == false
-    @level_two.draw
-    @coins.draw
-    @goal.draw
+    @hero = Image.new('.\super-ruby-bros\assets\hero.png', z: 4)
+    background = Image.new('.\super-ruby-bros\assets\bg.png', z: 3)
+    @level_three.draw
     @player.draw
-    enemy_collision?
-    @enemies.move_enemy_1
-    @enemies.enemy_movement
-    coin_collision?
-    coin_collision2?
-    coin_collision3?
-    level_two_collision_detected?
-    level_two_collision_detected_bottom?
-    has_won?
+    level_three_collision_detected?
+    level_three_collision_detected_bottom?
     player_methods
+    @hero.x = @player.x - 5
+    @hero.y = @player.y - 34
+
+
+ 
   else
     game_over
   end

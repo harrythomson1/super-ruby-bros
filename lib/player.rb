@@ -4,7 +4,7 @@ class Player
   
   def initialize
     @jumper_state = 'grounded'
-    @jump_height = 110
+    @jump_height = 125
     @direction = nil
     @x = 40
     @y = Window.height - 40
@@ -16,9 +16,9 @@ class Player
   end
 
   def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'blue')
-    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500)
-    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50)
+    @player = Square.new(x: @x, y: @y, size: 25, color: 'blue', z:0)
+    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 750,color: 'black')
+    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 750, y:40, color: 'black')
     @x1 = @player.x1
     @x2 = @player.x2
     @x3 = @player.x3
