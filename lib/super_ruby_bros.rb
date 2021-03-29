@@ -101,11 +101,19 @@ def level_one_coin_collision3?
 end
 
 
-def enemy_collision?
+def level_one_enemy_collision?
   if @level_one_enemies.collision_enemy(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
     @player.lose_life
   end
 end
+
+def level_two_enemy_collision?
+  if @level_two_enemies.collision_enemy(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @player.lose_life
+  end
+end
+
+
 
 def game_over
   if @player.lives == 0
@@ -133,7 +141,7 @@ update do
     level_one_coin_collision1?
     level_one_coin_collision2?
     level_one_coin_collision3?
-    enemy_collision?
+    level_one_enemy_collision?
     level_one_collision_detected?
     level_one_collision_detected_bottom?
     has_won?
@@ -144,6 +152,7 @@ update do
     @level_two_enemies.draw
     @level_two_enemies.move_enemy_1
     @level_two_enemies.enemy_movement
+    level_two_enemy_collision?
     level_two_collision_detected?
     level_two_collision_detected_bottom?
     player_methods

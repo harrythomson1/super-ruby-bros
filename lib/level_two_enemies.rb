@@ -1,5 +1,6 @@
 class LevelTwoEnemies
 
+
   def initialize
     @x1 = 200
     @x1_speed = 0
@@ -10,14 +11,21 @@ class LevelTwoEnemies
   end
 
   def move_enemy_1
-    if @x1 == 450
-      x1_speed = -2
+    if @x1 == 430
+      @x1_speed = -2
     elsif @x1 == 200
-      x1_speed = 2
+      @x1_speed = 2
     end
   end
 
   def enemy_movement
     @x1 += @x1_speed
+  end
+
+  def collision_enemy(x1, y1, x2, y2, x3, y3, x4, y4)
+    @enemy1.contains?(x1, y1) ||
+    @enemy1.contains?(x2, y2) ||
+    @enemy1.contains?(x3, y3) ||
+    @enemy1.contains?(x4, y4)
   end
 end
