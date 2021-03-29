@@ -1,22 +1,24 @@
 require 'ruby2d'
 require_relative 'player'
 require_relative 'goal'
-require_relative 'coin'
-require_relative 'enemy'
+require_relative 'level_one_coins'
+require_relative 'level_one_enemies'
 require_relative 'level_one'
 require_relative 'level_two'
 
 
 set title: "Super Ruby Bros", background: 'red', width: 900, height: 700
 
+GRAVITY = 7
+
 @level_one = LevelOne.new
 @level_two = LevelTwo.new
 @goal = Goal.new
-@coins = Coins.new
+@level_one_coins = LevelOneCoins.new
 @player = Player.new
-@enemies = Enemy.new
+@level_one_enemies = LevelOneEnemies.new
 
-level_two = true
+level_one = true
 
 on :key_held do |event|
   if event.key == 'a'
@@ -41,7 +43,7 @@ def level_one_collision_detected?
     @player.touching_platform = true
   else
     @player.touching_platform = false
-    @player.y += 4
+    @player.y += GRAVITY
   end
 end
 
@@ -57,7 +59,7 @@ def level_two_collision_detected?
     @player.touching_platform = true
   else
     @player.touching_platform = false
-    @player.y += 4
+    @player.y += GRAVITY
   end
 end
 
@@ -73,29 +75,30 @@ def has_won?
   end
 end
 
-def coin_collision?
-  if @coins.collision_coin(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @coins.move_coin
+def level_one_coin_collision1?
+  if @level_one_coins.collision_coin(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @level_one_coins.move_coin
     @player.coins += 1
   end
 end
 
-def coin_collision2?
-  if @coins.collision_coin2(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @coins.move_coin2
+def level_one_coin_collision2?
+  if @level_one_coins.collision_coin2(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @level_one_coins.move_coin2
     @player.coins += 1
   end
 end
 
-def coin_collision3?
-  if @coins.collision_coin3(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @coins.move_coin3
+def level_one_coin_collision3?
+  if @level_one_coins.collision_coin3(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+    @level_one_coins.move_coin3
     @player.coins += 1
   end
 end
+
 
 def enemy_collision?
-  if @enemies.collision_enemy(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+  if @level_one_enemies.collision_enemy(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
     @player.lose_life
   end
 end
@@ -107,19 +110,32 @@ def game_over
 end
 
 def player_methods
-  @player.reset
   @player.jump
   @player.checks_if_falling
   @player.fall_death
+  @player.reset
 end
 
 update do
   clear
-  if @player.lives > 0 && level_two == false
+  if @player.lives > 0 && level_one == true
     @level_one.draw
+    @player.draw
+    @level_one_enemies.draw
+    @level_one_coins.draw
+    @level_one_enemies.move_enemy_1
+    @level_one_enemies.enemy_movement
+    level_one_coin_collision1?
+    level_one_coin_collision2?
+    level_one_coin_collision3?
+    enemy_collision?
+    level_one_collision_detected?
+    level_one_collision_detected_bottom?
+    player_methods
+  elsif level_one == false
+    @level_two.draw
     @coins.draw
     @goal.draw
-    @enemies.draw
     @player.draw
     enemy_collision?
     @enemies.move_enemy_1
@@ -127,15 +143,9 @@ update do
     coin_collision?
     coin_collision2?
     coin_collision3?
-    level_one_collision_detected?
-    level_one_collision_detected_bottom?
-    has_won?
-    player_methods
-  elsif level_two == true
-    @level_two.draw
-    @player.draw
     level_two_collision_detected?
     level_two_collision_detected_bottom?
+    has_won?
     player_methods
   else
     game_over

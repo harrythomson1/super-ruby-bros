@@ -4,12 +4,11 @@ class Player
   
   def initialize
     @jumper_state = 'grounded'
-    @jump_height = 75
+    @jump_height = 110
     @direction = nil
     @x = 40
-    @y = 400
-    @current_floor = 400
-    @platform_height = 400
+    @y = Window.height - 40
+    @platform_height = 0
     @reset = false
     @coins = 0
     @lives = 3
@@ -33,7 +32,7 @@ class Player
   def reset
     if @reset
       @x = 40
-      @y = 405
+      @y = Window.height - 40
       @reset = false
     end
   end
@@ -42,7 +41,7 @@ class Player
     if @y < (@platform_height - @jump_height)
       @jumper_state = nil
     elsif @jumper_state == :jumping
-      @y -= 12
+      @y -= 15
     end
   end
 

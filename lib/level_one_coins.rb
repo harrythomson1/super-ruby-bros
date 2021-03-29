@@ -1,17 +1,17 @@
-class Coins
+class LevelOneCoins
 
   REMOVE_COIN = 1000
 
   def initialize
-    @y1 = 100
-    @y2 = 100
-    @y3 = 100
+    @y1 = Window.height - 285
+    @y2 = Window.height - 285
+    @y3 = Window.height - 285
   end
 
   def draw
-    @coin = Square.new(x: 520, y: @y1, size: 25, color: 'yellow')
-    @coin2 = Square.new(x: 470, y: @y2, size: 25, color: 'yellow')
-    @coin3 = Square.new(x: 420, y: @y3, size: 25, color: 'yellow')
+    @coin = Square.new(x: Window.width - 250, y: @y1, size: 25, color: 'yellow')
+    @coin2 = Square.new(x: Window.width - 200, y: @y2, size: 25, color: 'yellow')
+    @coin3 = Square.new(x: Window.width - 150, y: @y3, size: 25, color: 'yellow')
   end
 
   def collision_coin (x1, y1, x2, y2, x3, y3, x4, y4) 

@@ -1,18 +1,18 @@
-class Enemy
+class LevelOneEnemies
   
   def initialize
-    @x1 = 336
+    @x1 = Window.width - 360
     @x_speed = 0
   end
 
   def draw
-    @enemy = Square.new(x: @x1, y: 347, size: 15 )
+    @enemy = Square.new(x: @x1 + 10, y: (Window.height - 174) - 15, size: 20 )
   end
 
   def move_enemy_1
-    if @x1 == 336
+    if @x1 == Window.width - 14
       @x_speed = -2
-    elsif @x1 == 248
+    elsif @x1 == Window.width - 360
       @x_speed = 2
     end
   end
