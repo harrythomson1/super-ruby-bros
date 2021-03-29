@@ -20,8 +20,8 @@ GRAVITY = 7
 @level_one_enemies = LevelOneEnemies.new
 @level_two_enemies = LevelTwoEnemies.new
 
-@stage_one = false
-@stage_two = true
+@stage_one = true
+@stage_two = false
 
 on :key_held do |event|
   if event.key == 'a'
@@ -76,6 +76,7 @@ def has_won?
   if @level_one_goal.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
     @stage_one = false
     @stage_two = true
+    @player.reset = true
   end
 end
 
