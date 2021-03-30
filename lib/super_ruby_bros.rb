@@ -10,6 +10,7 @@ set title: "Super Ruby Bros", background: 'red', width: 900, height: 700
 GRAVITY = 7
 
 @level_one = LevelOne.new
+@level_two = LevelTwo.new
 @level_three = LevelThree.new
 @player = Player.new
 
@@ -137,10 +138,10 @@ update do
     player_methods
 
   elsif @player.lives > 0 && @stage_two == true 
-    level_methods(@level_one)
+    level_methods(@level_two)
     @player.draw
     level_two_platform_collision
-    level_one_coin_collision
+    level_two_coin_collision
     has_won?
     @player.gravity
     player_methods 
