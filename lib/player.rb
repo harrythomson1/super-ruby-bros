@@ -21,7 +21,7 @@ class Player
 
   def draw
     @square = Square.new(x: @x, y: @y, size: 25, color: 'blue')
-    @hero = Image.new('./assets/hero.png', z: 5, rotate: 180)
+    @hero = Sprite.new('./assets/hero.png', z: 5, clip_width: 34)
     @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500)
     @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50)
   end
