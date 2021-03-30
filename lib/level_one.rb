@@ -14,9 +14,9 @@ class LevelOne
 
     @images = []
 
-    @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow', z:10),
-      Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow', z:10),
-      Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow', z:10)]
+    @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 250, y: Window.height - 285, height: 40, width: 40, z:10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z:10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 150, y: Window.height - 285, height: 40, width: 40, z:10)]
 
     @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z:10)]
 
@@ -43,6 +43,12 @@ class LevelOne
      end
 
     @goal.add
+  end
+
+  def coin_animation
+    @coins.each do |coin|
+      coin.play
+    end
   end
 
   def check_enemy_0_boundary

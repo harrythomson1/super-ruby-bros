@@ -14,9 +14,9 @@ GRAVITY = 7
 @level_three = LevelThree.new
 @player = Player.new
 
-@stage_one = false
+@stage_one = true
 @stage_two = false
-@stage_three = true
+@stage_three = false
 
 on :key_held do |event|
   if event.key == 'a' && @player.x > 0
@@ -156,10 +156,13 @@ update do
   if @player.lives > 0 && @stage_one == true
     @level_one.check_enemy_0_boundary
     level_methods(@level_one)
+    @level_one.coin_animation
   elsif @player.lives > 0 && @stage_two == true 
     @level_two.add_assets
+    @level_two.coin_animation
   elsif @player.lives > 0 && @stage_three == true
     level_methods(@level_three)
+    @level_three.coin_animation
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary

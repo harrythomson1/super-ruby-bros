@@ -31,9 +31,9 @@ class LevelTwo
       Image.new('./assets/wood.png', z: 4, x: Window.width - 470, y: Window.height - 275),
       Image.new('./assets/wood.png', z: 4, x: 750, y: Window.height - 30 )]
       
-      @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow', z: 5),
-        Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow', z: 5),
-        Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow', z: 5)]
+      @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 250, y: Window.height - 285, height: 40, width: 40, z: 5),
+        Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z: 5),
+        Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 150, y: Window.height - 285, height: 40, width: 40, z: 5)]
   
       @goal = Triangle.new(x1: 40, x2: 10, x3: 70, y1: Window.height - 550, y2: Window.height - 500, y3: Window.height - 500, color: 'fuchsia', z: 6)
       
@@ -54,6 +54,12 @@ class LevelTwo
       end
 
       @goal.add
+    end
+
+    def coin_animation
+      @coins.each do |coin|
+        coin.play
+      end
     end
   
   
