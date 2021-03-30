@@ -1,6 +1,7 @@
 require 'ruby2d'
 require_relative 'player'
 require_relative 'level_one'
+require_relative 'level_two'
 require_relative 'level_three'
 
 
@@ -60,6 +61,18 @@ def level_one_enemy_collision
   end
 end
 
+def level_two_platform_collision
+  @level_two.platforms.each do |platform|
+    if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
+      @player.platform_height = @player.y
+      @player.y -= 7
+      @player.touching_platform = true
+    elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
+      @player.jumper_state = nil
+    end
+  end
+end
+
 def level_three_platform_collision
   @level_three.platforms.each do |platform|
     if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
@@ -111,6 +124,7 @@ end
 
 update do
   clear
+  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\bg.png', z: 3) 
   if @player.lives > 0 && @stage_one == true
     @level_one.check_enemy_0_boundary
     level_methods(@level_one)
@@ -121,6 +135,16 @@ update do
     has_won?
     @player.gravity
     player_methods
+
+  elsif @player.lives > 0 && @stage_two == true 
+    level_methods(@level_one)
+    @player.draw
+    level_two_platform_collision
+    level_one_coin_collision
+    has_won?
+    @player.gravity
+    player_methods 
+
   elsif @player.lives > 0 && @stage_three == true
     @level_three.add_platforms
     @level_three.add_enemies
