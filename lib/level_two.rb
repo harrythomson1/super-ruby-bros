@@ -22,7 +22,7 @@ class LevelTwo
         Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow', z: 5),
         Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow', z: 5)]
   
-      @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 6)
+      @goal = Triangle.new(x1: Window.width - 150, x2: Window.width - 125, x3: Window.width - 115, y1: Window.height - 210, y2: Window.height - 100, y3: Window.height - 100, color: 'fuchsia', z: 6)
       
       @enemy_speed = 0
     end
