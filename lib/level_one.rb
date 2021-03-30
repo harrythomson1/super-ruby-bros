@@ -11,11 +11,15 @@ class LevelOne
       Rectangle.new(x: 300, y: Window.height - 325, color: 'green', height: 10, z: 3, width: 100),
       Rectangle.new(x: 150, y: Window.height - 400, color: 'green', height: 10, z: 3, width: 100),
       Rectangle.new(x: 0, y: Window.height - 475, color: 'green', height: 10, z: 3, width: 100)]
+
     @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow'),
       Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow'),
       Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow')]
+
     @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20 )]
+
     @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 1)
+    
     @enemy_speed = 0
   end
 

@@ -1,7 +1,9 @@
 class Player
 
-  attr_accessor :direction, :jumper_state, :lives, :touching_platform, :current_floor, :y, :x, :x1, :x2, :x3, :x4, :y1, :y2, :y3, :y4, :platform_height, :reset, :coins, :player
-  
+  attr_reader :square
+  attr_accessor :direction, :jumper_state, :lives, :touching_platform, :current_floor, :y, :x, :platform_height, :reset, :coins, :player
+
+
   def initialize
     @jumper_state = 'grounded'
     @jump_height = 110
@@ -16,17 +18,9 @@ class Player
   end
 
   def draw
-    @player = Square.new(x: @x, y: @y, size: 25, color: 'blue')
+    @square = Square.new(x: @x, y: @y, size: 25, color: 'blue')
     @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500)
     @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50)
-    @x1 = @player.x1
-    @x2 = @player.x2
-    @x3 = @player.x3
-    @x4 = @player.x4    
-    @y1 = @player.y1
-    @y2 = @player.y2
-    @y3 = @player.y3
-    @y4 = @player.y4
   end
 
   def reset
