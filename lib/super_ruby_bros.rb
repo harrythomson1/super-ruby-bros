@@ -109,6 +109,10 @@ def has_won?
     @stage_one = false
     @stage_two = true
     @player.reset = true
+  elsif @level_two.goal.contains?(@player.square.x1, @player.square.y1) || @level_one.goal.contains?(@player.square.x2, @player.square.y2) || @level_one.goal.contains?(@player.square.x3, @player.square.y3) || @level_one.goal.contains?(@player.square.x4, @player.square.y4)
+    @stage_two = false
+    @stage_three = true
+    @player.reset = true
   end
 end
 
@@ -126,15 +130,12 @@ def player_methods
 end
 
 def level_methods(level)
-  level.add_platforms
-  level.add_coins
-  level.add_enemies
+  level.add_assets
   level.enemy_movement
-  level.add_goal
 end
 
 
-def level_methods(level)
+def level_methods_2(level)
   level.add_platforms
   level.add_coins
   level.add_goal
@@ -162,25 +163,13 @@ elsif @player.lives > 0 && @stage_one == true
     @player.gravity
     player_methods
   elsif @player.lives > 0 && @stage_two == true 
-    level_methods(@level_two)
+    @level_two.add_assets
     @player.draw
     level_two_platform_collision
     level_two_coin_collision
     has_won?
     @player.gravity
     player_methods
-    box_1 = Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 550)
-    box_2 = Image.new('./assets/wood.png', z: 4, x: Window.width - 350, y: Window.height - 175)
-    box_3 = Image.new('./assets/wood.png', z: 4,x: 125, y: Window.height - 250)
-    box_4 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150)
-    box_5 = Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 10)
-    box_6 = Image.new('./assets/wood.png', z: 4, x: Window.width - 150, y: Window.height - 210)
-    box_7 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335)
-    box_8 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340)
-    box_9 = Image.new('./assets/wood.png', z: 4, x: 150, y: Window.height - 85)
-    box_10 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
-    box_11 = Image.new('./assets/wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
-    box_12 = Image.new('./assets/wood.png', z: 4, x: 750, y: Window.height - 30 ) 
   elsif @player.lives > 0 && @stage_three == true
     @level_three.add_platforms
     @level_three.add_enemies

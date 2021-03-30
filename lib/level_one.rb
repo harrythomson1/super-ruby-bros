@@ -12,6 +12,8 @@ class LevelOne
       Rectangle.new(x: 150, y: Window.height - 400, color: 'green', height: 10, z: 3, width: 100),
       Rectangle.new(x: 0, y: Window.height - 475, color: 'green', height: 10, z: 3, width: 100)]
 
+    @images = []
+
     @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow'),
       Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow'),
       Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow')]
@@ -23,25 +25,23 @@ class LevelOne
     @enemy_speed = 0
   end
 
-  def add_platforms
+  def add_assets
     @platforms.each do |platform|
       platform.add
     end
-  end
 
-  def add_coins
     @coins.each do |coin|
       coin.add
     end
-  end
 
-  def add_enemies
-    @enemies.each do |enemy|
-     enemy.add
+    @images.each do |image|
+      image.add
     end
-  end
 
-  def add_goal
+    @enemies.each do |enemy|
+      enemy.add
+     end
+
     @goal.add
   end
 
