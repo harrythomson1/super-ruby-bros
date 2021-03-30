@@ -1,7 +1,7 @@
 class Player
 
   attr_reader :square, :lives
-  attr_writer :reset
+  attr_writer :reset, :hard_reset
   attr_accessor :jumper_state, :touching_platform, :y, :x, :platform_height, :coins, :player, :hero
 
 
@@ -14,23 +14,34 @@ class Player
     @y = Window.height - 80
     @platform_height = 0
     @reset = false
+    @hard_reset = false
     @coins = 0
     @lives = 3
     @touching_platform = false
+    @hero = Sprite.new('./assets/hero.png', z: 5, clip_width: 33, height: 57, width: 33)
   end
 
   def draw
-    @square = Square.new(x: @x, y: @y, size: 25, color: 'blue')
-    @hero = Sprite.new('./assets/hero.png', z: 5, clip_width: 34)
-    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500)
-    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50)
+    @square = Rectangle.new(x: @x, y: @y, color: 'blue', width: 33, height: 47)
+    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500, color: 'red')
+    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50, color: 'red')
   end
 
   def reset
     if @reset
       @x = 40
-      @y = Window.height - 40
+      @y = Window.height - 50
       @reset = false
+    end
+  end
+
+  def hard_reset
+    if @hard_reset
+      @x = 40
+      @y = Window.height - 50
+      @hard_reset = false
+      @lives = 3
+      @coins = 0
     end
   end
 

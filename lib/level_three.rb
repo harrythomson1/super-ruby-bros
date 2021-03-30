@@ -20,7 +20,7 @@ class LevelThree
       Rectangle.new(x: 320, y: Window.height - 350, height: 10, width: 30, color: 'green', z: 10),
       Rectangle.new(x: 410, y: Window.height - 430, height: 10, width: 50, color: 'green', z: 10),
       Rectangle.new(x: 550, y: Window.height - 470, height: 10, width: 30, color: 'green', z: 10),
-      Rectangle.new(x: 610, y: Window.height - 550, height: 10, width: 30, color: 'green', z: 10),
+      Rectangle.new(x: 610, y: Window.height - 550, height: 10, width: 60, color: 'yellow', z: 10),
       Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 10)]
 
     @images = []
