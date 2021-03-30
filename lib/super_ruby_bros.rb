@@ -147,7 +147,7 @@ update do
   @hero.x = @player.x - 5
   @hero.y = @player.y - 30 
 if @player.lives == 0 
-  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\gameover.png', z: 3, x: 150, y: 200) 
+  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\gameover.png', z: 3, x: 150, y: 200) 
   endgame_text = Text.new('Coins Collected', z: 4, color: 'white', size: 25, x: 360, y: 500 ) 
   total_coins = Text.new(@player.coins, z: 4, color: 'white', size: 40, x: 438, y: 540) 
   endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'white', size: 20, x:350, y: 600 )
