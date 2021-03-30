@@ -6,6 +6,8 @@ require_relative 'level_one_enemies'
 require_relative 'level_one'
 require_relative 'level_two'
 require_relative 'level_three'
+require_relative 'level_three_coins'
+require_relative 'level_three_enemies'
 
 
 set title: "Super Ruby Bros", width: 900, height: 700
