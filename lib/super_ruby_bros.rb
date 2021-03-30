@@ -125,7 +125,10 @@ end
 
 update do
   clear
-  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\bg.png', z: 3) 
+  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\bg.png', z: 3)
+  @hero = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\hero.png', z: 5)
+  @hero.x = @player.x - 5
+  @hero.y = @player.y - 30 
   if @player.lives > 0 && @stage_one == true
     @level_one.check_enemy_0_boundary
     level_methods(@level_one)
@@ -144,7 +147,19 @@ update do
     level_two_coin_collision
     has_won?
     @player.gravity
-    player_methods 
+    player_methods
+    box_1 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 550)
+    box_2 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 350, y: Window.height - 175)
+    box_3 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4,x: 125, y: Window.height - 250)
+    box_4 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150)
+    box_5 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 10)
+    box_6 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 150, y: Window.height - 210)
+    box_7 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335)
+    box_8 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340)
+    box_9 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: 150, y: Window.height - 85)
+    box_10 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
+    box_11 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
+    box_12 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\wood.png', z: 4, x: 750, y: Window.height - 30 ) 
 
   elsif @player.lives > 0 && @stage_three == true
     @level_three.add_platforms
