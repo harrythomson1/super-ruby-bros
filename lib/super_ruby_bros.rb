@@ -15,6 +15,7 @@ GRAVITY = 7
 @player = Player.new
 
 @stage_one = true
+@stage_two = false 
 @stage_three = false
 
 on :key_held do |event|
@@ -106,7 +107,7 @@ end
 def has_won?
   if @level_one.goal.contains?(@player.square.x1, @player.square.y1) || @level_one.goal.contains?(@player.square.x2, @player.square.y2) || @level_one.goal.contains?(@player.square.x3, @player.square.y3) || @level_one.goal.contains?(@player.square.x4, @player.square.y4)
     @stage_one = false
-    @stage_three = true
+    @stage_two = true
     @player.reset = true
   end
 end
@@ -132,13 +133,25 @@ def level_methods(level)
   level.add_goal
 end
 
+
+def level_methods(level)
+  level.add_platforms
+  level.add_coins
+  level.add_goal
+end
+
 update do
   clear
   background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\bg.png', z: 3)
   @hero = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\hero.png', z: 5)
   @hero.x = @player.x - 5
   @hero.y = @player.y - 30 
-  if @player.lives > 0 && @stage_one == true
+if @player.lives == 0 
+  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME\super-ruby-bros\assets\gameover.png', z: 3, x: 150, y: 200) 
+  endgame_text = Text.new('Coins Collected', z: 4, color: 'white', size: 25, x: 360, y: 500 ) 
+  total_coins = Text.new(@player.coins, z: 4, color: 'white', size: 40, x: 438, y: 540) 
+  endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'white', size: 20, x:350, y: 600 )
+elsif @player.lives > 0 && @stage_one == true
     @level_one.check_enemy_0_boundary
     level_methods(@level_one)
     @player.draw
@@ -148,7 +161,6 @@ update do
     has_won?
     @player.gravity
     player_methods
-
   elsif @player.lives > 0 && @stage_two == true 
     level_methods(@level_two)
     @player.draw
@@ -169,7 +181,6 @@ update do
     box_10 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
     box_11 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
     box_12 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: 750, y: Window.height - 30 ) 
-
   elsif @player.lives > 0 && @stage_three == true
     @level_three.add_platforms
     @level_three.add_enemies
