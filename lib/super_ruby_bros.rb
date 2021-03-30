@@ -64,6 +64,15 @@ def level_two_collision_detected?
   end
 end
 
+def level_one_coin_collision_detected?
+  @level_one.coins.each do |coin|
+    if coin.contains?(@player.x1, @player.y1) || coin.contains?(@player.x2, @player.y2) || coin.contains?(@player.x3, @player.y3) || coin.contains?(@player.x4, @player.y4)
+      @player.coins += 1
+      coin.y = 1000
+    end
+  end
+end
+
 def has_won?
   if @level_one_goal.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
     @stage_one = false
@@ -71,28 +80,6 @@ def has_won?
     @player.reset = true
   end
 end
-
-def level_one_coin_collision1?
-  if @level_one_coins.collision_coin(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @level_one_coins.move_coin
-    @player.coins += 1
-  end
-end
-
-def level_one_coin_collision2?
-  if @level_one_coins.collision_coin2(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @level_one_coins.move_coin2
-    @player.coins += 1
-  end
-end
-
-def level_one_coin_collision3?
-  if @level_one_coins.collision_coin3(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
-    @level_one_coins.move_coin3
-    @player.coins += 1
-  end
-end
-
 
 def level_one_enemy_collision?
   if @level_one_enemies.collision_enemy(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
@@ -125,18 +112,16 @@ update do
   clear
   if @player.lives > 0 && @stage_one == true
     @level_one.add_platforms
+    @level_one.add_coins
+    @level_one.add_enemies
+    @level_one.enemy_movement
+    @level_one.check_enemy_1_boundary
     @player.draw
     @level_one_goal.draw
-    @level_one_enemies.draw
-    @level_one_coins.draw
-    @level_one_enemies.move_enemy_1
-    @level_one_enemies.enemy_movement
-    level_one_coin_collision1?
-    level_one_coin_collision2?
-    level_one_coin_collision3?
-    level_one_enemy_collision?
+    # level_one_enemy_collision?
     level_one_collision_detected?
     has_won?
+    level_one_coin_collision_detected?
     @player.gravity
     player_methods
   elsif @player.lives > 0 && @stage_two == true
