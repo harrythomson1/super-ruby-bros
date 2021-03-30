@@ -1,6 +1,6 @@
 class LevelThree
 
-  attr_reader :platforms, :enemies, :coins
+  attr_reader :platforms, :enemies, :coins, :images
 
   def initialize
     @platforms = [Rectangle.new(x: 0, y: Window.height - 10, height: 10, width: 100, color: 'green', z: 10),
@@ -23,7 +23,7 @@ class LevelThree
       Rectangle.new(x: 610, y: Window.height - 550, height: 10, width: 60, color: 'yellow', z: 10),
       Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 10)]
 
-    @images = []
+    @images = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 50, y: Window.height - 200, z:100, height: 40, width: 40)]
     
     @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 10),
       Square.new(x: 490, y: Window.height - 270, size: 20, z: 10),
