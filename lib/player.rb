@@ -1,7 +1,9 @@
 class Player
 
-  attr_reader :square
-  attr_accessor :direction, :jumper_state, :lives, :touching_platform, :current_floor, :y, :x, :platform_height, :reset, :coins, :player
+  attr_reader :square, :lives
+  attr_writer :reset
+  attr_accessor :jumper_state, :touching_platform, :y, :x, :platform_height, :coins, :player
+
 
 
   def initialize

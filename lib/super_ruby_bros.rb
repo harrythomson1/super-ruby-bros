@@ -26,7 +26,6 @@ on :key_held do |event|
 end
 
 on :key_up do |event|
-  @player.direction = nil
   if event.key == 'space'
     @player.jumper_state = nil
   end
