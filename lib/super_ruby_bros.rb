@@ -72,6 +72,15 @@ def level_three_platform_collision
   end
 end
 
+def level_three_coin_collision
+  @level_three.coins.each do |coin|
+    if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
+      @player.coins += 1
+      coin.y = 1000
+    end
+  end
+end
+
 def level_three_enemy_collision
   @level_three.enemies.each do |enemy|
     if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
@@ -122,13 +131,12 @@ update do
     @player.gravity
     player_methods
   elsif @player.lives > 0 && @stage_three == true
-    @level_three.add_platforms
-    @level_three.add_enemies
+    level_methods(@level_three)
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
-    @level_three.enemy_movement
     @player.draw
+    level_three_coin_collision
     level_three_enemy_collision
     level_three_platform_collision
     @player.gravity

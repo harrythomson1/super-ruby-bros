@@ -1,6 +1,6 @@
 class LevelThree
 
-  attr_reader :platforms, :enemies
+  attr_reader :platforms, :enemies, :coins
 
   def initialize
     @platforms = [Rectangle.new(x: 0, y: Window.height - 10, height: 10, width: 100, color: 'green', z: 1),
@@ -25,6 +25,14 @@ class LevelThree
     @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20),
       Square.new(x: 490, y: Window.height - 270, size: 20),
       Square.new(x: 115, y: Window.height - 450, size: 20)]
+    @coins = [Square.new(x: Window.width - 30, y: Window.height - 200, size: 25, color: 'yellow'),
+      Square.new(x: Window.width - 30, y: Window.height - 270, size: 25, color: 'yellow'),
+      Square.new(x: 540, y: Window.height - 270, size: 25, color: 'yellow'),
+      Square.new(x: 490, y: Window.height - 270, size: 25, color: 'yellow'),
+      Square.new(x: 440, y: Window.height - 270, size: 25, color: 'yellow'),
+      Square.new(x: 50, y: Window.height - 200, size: 25, color: 'yellow'),
+      Square.new(x: 115, y: Window.height - 440, size: 25, color: 'yellow')]
+    @goal = Triangle.new(x1: Window.width - 60, x2: Window.width - 110, x3: Window.width - 10, y1: Window.height - 670, y2: Window.height - 620, y3: Window.height - 620, color: 'fuchsia', z: 1)
     @enemy_0_speed = 0
     @enemy_1_speed = 0
     @enemy_2_speed = 0
@@ -41,6 +49,16 @@ class LevelThree
     @enemies.each do |enemy|
       enemy.add
     end
+  end
+
+  def add_coins
+    @coins.each do |coin|
+      coin.add
+    end
+  end
+
+  def add_goal
+    @goal.add
   end
 
   def check_enemy_0_boundary
