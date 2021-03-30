@@ -2,7 +2,7 @@ class Player
 
   attr_reader :square, :lives
   attr_writer :reset
-  attr_accessor :jumper_state, :touching_platform, :y, :x, :platform_height, :coins, :player
+  attr_accessor :jumper_state, :touching_platform, :y, :x, :platform_height, :coins, :player, :hero
 
 
 
@@ -21,6 +21,7 @@ class Player
 
   def draw
     @square = Square.new(x: @x, y: @y, size: 25, color: 'blue')
+    @hero = Image.new('./assets/hero.png', z: 5, rotate: 180)
     @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500)
     @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50)
   end

@@ -14,13 +14,13 @@ class LevelOne
 
     @images = []
 
-    @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow'),
-      Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow'),
-      Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow')]
+    @coins = [Square.new(x: Window.width - 250, y: Window.height - 285, size: 25, color: 'yellow', z:10),
+      Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow', z:10),
+      Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow', z:10)]
 
-    @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20 )]
+    @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z:10)]
 
-    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 1)
+    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 10)
     
     @enemy_speed = 0
   end
