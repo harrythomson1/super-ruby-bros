@@ -9,9 +9,9 @@ class LevelThreeCoins
     end
   
     def draw
-      @coin = Square.new(x: Window.width - 250, y: @y1, size: 25, color: 'yellow')
-      @coin2 = Square.new(x: Window.width - 200, y: @y2, size: 25, color: 'yellow')
-      @coin3 = Square.new(x: Window.width - 150, y: @y3, size: 25, color: 'yellow')
+      @coin = Square.new(x: Window.width - 250, y: @y1, size: 25, color: 'yellow', z: 5)
+      @coin2 = Square.new(x: Window.width - 200, y: @y2, size: 25, color: 'yellow', z: 5)
+      @coin3 = Square.new(x: Window.width - 150, y: @y3, size: 25, color: 'yellow', z: 5)
     end
   
     def collision_coin (x1, y1, x2, y2, x3, y3, x4, y4) 
