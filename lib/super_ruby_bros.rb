@@ -1,8 +1,5 @@
 require 'ruby2d'
 require_relative 'player'
-require_relative 'goal'
-require_relative 'level_one_coins'
-require_relative 'level_one_enemies'
 require_relative 'level_two_enemies'
 require_relative 'level_one'
 require_relative 'level_two'
@@ -14,10 +11,7 @@ GRAVITY = 7
 
 @level_one = LevelOne.new
 @level_two = LevelTwo.new
-@level_one_goal = Goal.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475)
-@level_one_coins = LevelOneCoins.new
 @player = Player.new
-@level_one_enemies = LevelOneEnemies.new
 @level_two_enemies = LevelTwoEnemies.new
 
 @stage_one = true
@@ -82,7 +76,7 @@ def level_two_collision_detected?
 end
 
 def has_won?
-  if @level_one_goal.collision(@player.x1, @player.y1, @player.x2, @player.y2, @player.x3, @player.y3, @player.x4, @player.y4)
+  if @level_one.goal.contains?(@player.x1, @player.y1) || @level_one.goal.contains?(@player.x2, @player.y2) || @level_one.goal.contains?(@player.x3, @player.y3) || @level_one.goal.contains?(@player.x4, @player.y4)
     @stage_one = false
     @stage_two = true
     @player.reset = true
@@ -110,16 +104,20 @@ def player_methods
   @player.reset
 end
 
+def level_methods(level)
+  level.add_platforms
+  level.add_coins
+  level.add_enemies
+  level.enemy_movement
+  level.add_goal
+end
+
 update do
   clear
   if @player.lives > 0 && @stage_one == true
-    @level_one.add_platforms
-    @level_one.add_coins
-    @level_one.add_enemies
-    @level_one.enemy_movement
     @level_one.check_enemy_0_boundary
+    level_methods(@level_one)
     @player.draw
-    @level_one_goal.draw
     level_one_enemy_collision
     level_one_platform_collision
     level_one_coin_collision

@@ -1,6 +1,6 @@
 class LevelOne
 
-  attr_reader :platforms, :coins, :enemies
+  attr_reader :platforms, :coins, :enemies, :goal
 
   def initialize
     @platforms = [Rectangle.new(x: 0, y: Window.height - 10, color: 'green', height: 10, z: 3, width: Window.width),
@@ -15,6 +15,7 @@ class LevelOne
       Square.new(x: Window.width - 200, y: Window.height - 285, size: 25, color: 'yellow'),
       Square.new(x: Window.width - 150, y: Window.height - 285, size: 25, color: 'yellow')]
     @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20 )]
+    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 1)
     @enemy_speed = 0
   end
 
@@ -34,6 +35,10 @@ class LevelOne
     @enemies.each do |enemy|
      enemy.add
     end
+  end
+
+  def add_goal
+    @goal.add
   end
 
   def check_enemy_0_boundary
