@@ -46,7 +46,7 @@ def platform_collision
   if @stage_one == true
     @level_one.platforms.each do |platform|
       if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
-        landed_on_platform
+        @player.landed_on_platform
       elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
@@ -54,7 +54,7 @@ def platform_collision
   elsif @stage_two == true
     @level_two.platforms.each do |platform|
       if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
-        landed_on_platform
+        @player.landed_on_platform
       elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
@@ -62,7 +62,7 @@ def platform_collision
   elsif @stage_three == true
     @level_three.platforms.each do |platform|
       if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
-        landed_on_platform
+        @player.landed_on_platform
       elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
@@ -125,12 +125,6 @@ def has_won?
       @player.reset = true
     end
   end
-end
-
-def landed_on_platform
-  @player.platform_height = @player.y
-  @player.y -= 7
-  @player.touching_platform = true
 end
 
 def player_methods

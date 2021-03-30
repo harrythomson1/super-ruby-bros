@@ -83,4 +83,10 @@ def gravity
     @y += 7
 end
 
+def landed_on_platform
+  @platform_height = @y
+  @y -= 7
+  @touching_platform = true
+end
+
 end
