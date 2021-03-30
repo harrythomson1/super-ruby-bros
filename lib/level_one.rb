@@ -1,6 +1,6 @@
 class LevelOne
 
-  attr_reader :platforms, :coins
+  attr_reader :platforms, :coins, :enemies
 
   def initialize
     @platforms = [Rectangle.new(x: 0, y: Window.height - 10, color: 'green', height: 10, z: 3, width: Window.width),
@@ -36,7 +36,7 @@ class LevelOne
     end
   end
 
-  def check_enemy_1_boundary
+  def check_enemy_0_boundary
     if @enemies[0].x == Window.width - 14
       @enemy_speed = -2
     elsif @enemies[0].x == Window.width - 350
