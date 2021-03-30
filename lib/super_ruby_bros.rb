@@ -142,12 +142,12 @@ end
 
 update do
   clear
-  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\bg.png', z: 3)
-  @hero = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\hero.png', z: 5)
+  background = Image.new('./assets/bg.png', z: 3)
+  @hero = Image.new('./assets/hero.png', z: 5)
   @hero.x = @player.x - 5
   @hero.y = @player.y - 30 
 if @player.lives == 0 
-  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\gameover.png', z: 3, x: 150, y: 200) 
+  background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200) 
   endgame_text = Text.new('Coins Collected', z: 4, color: 'white', size: 25, x: 360, y: 500 ) 
   total_coins = Text.new(@player.coins, z: 4, color: 'white', size: 40, x: 438, y: 540) 
   endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'white', size: 20, x:350, y: 600 )
@@ -169,18 +169,18 @@ elsif @player.lives > 0 && @stage_one == true
     has_won?
     @player.gravity
     player_methods
-    box_1 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 550)
-    box_2 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 350, y: Window.height - 175)
-    box_3 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4,x: 125, y: Window.height - 250)
-    box_4 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150)
-    box_5 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: 0, y: Window.height - 10)
-    box_6 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 150, y: Window.height - 210)
-    box_7 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335)
-    box_8 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340)
-    box_9 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: 150, y: Window.height - 85)
-    box_10 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
-    box_11 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
-    box_12 = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\RUBY_GAME_2\super-ruby-bros\assets\wood.png', z: 4, x: 750, y: Window.height - 30 ) 
+    box_1 = Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 550)
+    box_2 = Image.new('./assets/wood.png', z: 4, x: Window.width - 350, y: Window.height - 175)
+    box_3 = Image.new('./assets/wood.png', z: 4,x: 125, y: Window.height - 250)
+    box_4 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150)
+    box_5 = Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 10)
+    box_6 = Image.new('./assets/wood.png', z: 4, x: Window.width - 150, y: Window.height - 210)
+    box_7 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335)
+    box_8 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340)
+    box_9 = Image.new('./assets/wood.png', z: 4, x: 150, y: Window.height - 85)
+    box_10 = Image.new('./assets/wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425)
+    box_11 = Image.new('./assets/wood.png', z: 4, x: Window.width - 470, y: Window.height - 275)
+    box_12 = Image.new('./assets/wood.png', z: 4, x: 750, y: Window.height - 30 ) 
   elsif @player.lives > 0 && @stage_three == true
     @level_three.add_platforms
     @level_three.add_enemies
