@@ -20,8 +20,8 @@ GRAVITY = 7
 @level_one_enemies = LevelOneEnemies.new
 @level_two_enemies = LevelTwoEnemies.new
 
-@stage_one = false
-@stage_two = true
+@stage_one = true
+@stage_two = false
 
 on :key_held do |event|
   if event.key == 'a'
@@ -41,23 +41,7 @@ on :key_up do |event|
 end
 
 def level_one_collision_detected?
-  if @level_one.collision(@player.x3, @player.y3, @player.x4, @player.y4)
-    @player.platform_height = @player.y
-    @player.touching_platform = true
-  else
-    @player.touching_platform = false
-    @player.y += GRAVITY
-  end
-end
-
-def level_one_collision_detected_bottom?
-  if @level_one.collision_bottom(@player.x1, @player.y1, @player.x2, @player.y2)
-    @player.jumper_state = nil
-  end
-end
-
-def level_two_collision_detected?
-  @level_two.platforms.each do |platform|
+  @level_one.platforms.each do |platform|
     if platform.contains?(@player.x3, @player.y3) || platform.contains?(@player.x4, @player.y4)
       @player.platform_height = @player.y
       @player.y -= 7
@@ -68,9 +52,13 @@ def level_two_collision_detected?
   end
 end
 
-def level_two_collision_detected_bottom?
+def level_two_collision_detected?
   @level_two.platforms.each do |platform|
-    if platform.contains?(@player.x1, @player.y1) || platform.contains?(@player.x2, @player.y2)
+    if platform.contains?(@player.x3, @player.y3) || platform.contains?(@player.x4, @player.y4)
+      @player.platform_height = @player.y
+      @player.y -= 7
+      @player.touching_platform = true
+    elsif platform.contains?(@player.x1, @player.y1) || platform.contains?(@player.x2, @player.y2)
       @player.jumper_state = nil
     end
   end
@@ -136,7 +124,7 @@ end
 update do
   clear
   if @player.lives > 0 && @stage_one == true
-    @level_one.draw
+    @level_one.add_platforms
     @player.draw
     @level_one_goal.draw
     @level_one_enemies.draw
@@ -148,8 +136,8 @@ update do
     level_one_coin_collision3?
     level_one_enemy_collision?
     level_one_collision_detected?
-    level_one_collision_detected_bottom?
     has_won?
+    @player.gravity
     player_methods
   elsif @player.lives > 0 && @stage_two == true
     @level_two.add_platforms
