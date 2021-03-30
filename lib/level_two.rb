@@ -4,7 +4,7 @@ class LevelTwo
   
     def initialize
       @platforms = [Rectangle.new(),
-        Rectangle.new(x: 150, y: Window.height - 85, color: 'orange', height: 10, z: 4, width: 77)
+        Rectangle.new(x: 150, y: Window.height - 85, color: 'orange', height: 10, z: 4, width: 77),
         Rectangle.new(x: (Window.width - 190) / 2, y: Window.height - 425, color: 'blue', height: 10, z: 4, width:40),
         Rectangle.new(x: 0, y: Window.height - 550, color: 'purple', height: 10, z:4 , width: 77),
         Rectangle.new(x: (Window.width - 350), y: Window.height - 175, color: 'white', height: 10, z: 4, width: 77),
