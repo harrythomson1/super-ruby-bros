@@ -64,6 +64,10 @@ class LevelThree
       enemy.add
      end
 
+    @images.each do |image|
+      image.add
+    end
+
     @goal.add
 
     @portal.add

@@ -16,7 +16,9 @@ class LevelOne
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z:10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 150, y: Window.height - 285, height: 40, width: 40, z:10)]
 
-    @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z:10)]
+    @images = [Image.new('./assets/crab.png', x: Window.width - 350, y: (Window.height - 184) - 15, width: 50, height: 30, size: 20, z: 10)]
+
+    @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z: 0)]
 
     @goal = Triangle.new(x1: 25, x2: -15, x3: 65, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 0)
     
@@ -32,6 +34,10 @@ class LevelOne
 
     @coins.each do |coin|
       coin.add
+    end
+
+    @images.each do |image|
+      image.add
     end
 
     @enemies.each do |enemy|
@@ -59,6 +65,7 @@ class LevelOne
 
   def enemy_movement
     @enemies[0].x += @enemy_speed
+    @images[0].x += @enemy_speed
   end
 
 end
