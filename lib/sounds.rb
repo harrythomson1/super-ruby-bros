@@ -3,8 +3,9 @@ class Sounds
   def initialize
     @coin = Sound.new('./assets/coin.wav')
     @jump = Sound.new('./assets/jump.wav')
-    @game_over = Sound.new('./assets/gameover.wav')
+    @game_over = Sound.new('./assets/game_over.wav')
     @death = Sound.new('./assets/death.wav')
+    @next_level = Sound.new('./assets/next_level.wav')
   end
 
   def coin
@@ -22,6 +23,12 @@ class Sounds
   def death
     @death.play
   end
+
+  def next_level
+    @next_level.play
+  end
+
+
 
 
 end

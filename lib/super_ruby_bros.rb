@@ -15,6 +15,11 @@ GRAVITY = 7
 @level_three = LevelThree.new
 @player = Player.new
 @sounds = Sounds.new
+@game_over_sound = false
+@song = Music.new('./assets/song.mp3')
+@song.volume = 50
+@song.play
+@song.loop = true
 
 @stage_one = true
 @stage_two = false
@@ -38,6 +43,8 @@ on :key_held do |event|
     coin_reset(@level_one)    
     coin_reset(@level_two)    
     coin_reset(@level_three)    
+    @game_over_sound = false
+    @song.play
   end
 end
 
@@ -135,12 +142,14 @@ def has_won?
     if @level_one.goal.contains?(@player.square.x1, @player.square.y1) || @level_one.goal.contains?(@player.square.x2, @player.square.y2) || @level_one.goal.contains?(@player.square.x3, @player.square.y3) || @level_one.goal.contains?(@player.square.x4, @player.square.y4)
       @stage_one = false
       @stage_two = true
+      @sounds.next_level
       @player.reset = true
     end
   elsif @stage_two == true
     if @level_two.goal.contains?(@player.square.x1, @player.square.y1) || @level_two.goal.contains?(@player.square.x2, @player.square.y2) || @level_two.goal.contains?(@player.square.x3, @player.square.y3) || @level_two.goal.contains?(@player.square.x4, @player.square.y4)
       @stage_two = false
       @stage_three = true
+      @sounds.next_level
       @player.reset = true
     end
   end
@@ -186,7 +195,11 @@ update do
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
   else
-    @sounds.game_over
+    if @game_over_sound == false
+      @song.stop
+      @sounds.game_over
+      @game_over_sound = true
+    end
     background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200) 
     endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 ) 
     total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540) 
