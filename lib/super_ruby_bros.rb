@@ -1,5 +1,6 @@
 require 'ruby2d'
 require_relative 'player'
+require_relative 'sounds'
 require_relative 'level_one'
 require_relative 'level_two'
 require_relative 'level_three'
@@ -13,6 +14,7 @@ GRAVITY = 7
 @level_two = LevelTwo.new
 @level_three = LevelThree.new
 @player = Player.new
+@sounds = Sounds.new
 
 @stage_one = true
 @stage_two = false
@@ -27,6 +29,7 @@ on :key_held do |event|
     @player.hero.play
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
+    @sounds.jump
   elsif event.key == 'return'
     @player.hard_reset = true
     @stage_one = true
@@ -75,6 +78,7 @@ def coin_collision
     @level_one.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
+        @sounds.coin
         coin.y = 1000
       end
     end
@@ -82,6 +86,7 @@ def coin_collision
     @level_two.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
+        @sounds.coin
         coin.y = 1000
       end
     end
@@ -89,6 +94,7 @@ def coin_collision
     @level_three.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
+        @sounds.coin
         coin.y = 1000
       end
     end
@@ -100,12 +106,14 @@ def enemy_collison
     @level_one.enemies.each do |enemy|
       if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
         @player.lose_life
+        @sounds.death
       end
     end
   elsif @stage_three == true
     @level_three.enemies.each do |enemy|
       if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
         @player.lose_life
+        @sounds.death
       end
     end
   end
