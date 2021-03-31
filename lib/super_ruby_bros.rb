@@ -35,9 +35,20 @@ on :key_held do |event|
     @stage_one = true
     @stage_two = false
     @stage_three = false
+    coin_reset(@level_one)    
+    coin_reset(@level_two)    
+    coin_reset(@level_three)    
   end
 end
 
+
+def coin_reset(level)
+  level.coins.each do |coin|
+    if coin.y > 1000 
+      coin.y -= 1000
+    end
+  end
+end
 
 on :key_up do |event|
   if event.key == 'space'
@@ -79,7 +90,7 @@ def coin_collision
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
         @sounds.coin
-        coin.y = 1000
+        coin.y += 1000
       end
     end
   elsif @stage_two == true
@@ -87,7 +98,7 @@ def coin_collision
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
         @sounds.coin
-        coin.y = 1000
+        coin.y += 1000
       end
     end
   elsif @stage_three == true
@@ -95,7 +106,7 @@ def coin_collision
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
         @sounds.coin
-        coin.y = 1000
+        coin.y += 1000
       end
     end
   end
@@ -175,6 +186,7 @@ update do
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
   else
+    @sounds.game_over
     background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200) 
     endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 ) 
     total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540) 
