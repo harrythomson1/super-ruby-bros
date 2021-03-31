@@ -21,9 +21,10 @@ GRAVITY = 7
 @song.play
 @song.loop = true
 
-@stage_one = true
+@stage_one = false
 @stage_two = false
-@stage_three = false
+@stage_three = true
+@winning_screen = false
 
 on :key_held do |event|
   if event.key == 'a' && @player.x > 0
@@ -152,6 +153,9 @@ def has_won?
       @sounds.next_level
       @player.reset = true
     end
+  elsif @player.lives > 0 && @stage_three == true && @level_three.goal.contains?(@player.square.x1, @player.square.y1) || @level_three.goal.contains?(@player.square.x2, @player.square.y2) || @level_three.goal.contains?(@player.square.x3, @player.square.y3) || @level_three.goal.contains?(@player.square.x4, @player.square.y4)
+      @stage_three = false
+      @winning_screen = true
   end
 end
 
@@ -197,6 +201,16 @@ update do
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
+  elsif @player.lives > 0 && @winning_screen == true
+    background = Image.new('./assets/win.png', z: 3, x: 150, y: 200)
+    background = Image.new('./assets/trophy.png', z: 3, x: 555, y: 400)
+    background = Image.new('./assets/trophy.png', z: 3, x: 20, y: 400)
+    @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 520, y: 450, height:40, width: 84, z: 10),
+    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 450, y: 450, height:40, width: 84, z: 10),
+    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 380, y: 450, height:40, width: 84, z: 10)]
+    endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
+    total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
+    endgame_text = Text.new('Hit Enter to play again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
   else
     if @game_over_sound == false
       @song.stop

@@ -1,6 +1,6 @@
 class LevelThree
-
-  attr_reader :platforms, :enemies, :coins, :images, :portal
+  
+  attr_reader :platforms, :enemies, :coins, :images, :portal, :goal
 
   def initialize
     @platforms = [Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, width: 100, z: 10),
@@ -23,9 +23,14 @@ class LevelThree
       Image.new('./assets/wood.png', x: 610, y: Window.height - 550, height: 10, width: 60, z: 10),
       Image.new('./assets/wood.png', x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, z: 10)]
 
-    @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 10),
-      Square.new(x: 490, y: Window.height - 270, size: 20, z: 10),
-      Square.new(x: 115, y: Window.height - 450, size: 20, z: 10)]
+
+    @images = [Image.new('./assets/crab.png', x: 200, y: Window.height - 35, width: 50, height: 30,size: 20, z: 10),
+      Image.new('./assets/jellyfish.png', x: 490, y: Window.height - 270, width: 175, height: 100, size: 20, z: 10),
+      Image.new('./assets/jellyfish.png', x: 115, y: Window.height - 450, width: 175, height: 100, size: 20, z: 10)]
+
+    @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 0),
+      Square.new(x: 490, y: Window.height - 270, size: 20, z: 0),
+      Square.new(x: 115, y: Window.height - 450, size: 20, z: 0)]
     
     @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 200, height:40, width: 40, z: 10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 270, height:40, width: 40, z: 10),
@@ -96,8 +101,11 @@ class LevelThree
 
   def enemy_movement
     @enemies[0].x += @enemy_0_speed
+    @images[0].x += @enemy_0_speed
     @enemies[1].y += @enemy_1_speed
+    @images[1].y += @enemy_1_speed
     @enemies[2].y += @enemy_2_speed
+    @images[2].y += @enemy_2_speed
   end
 
 end
