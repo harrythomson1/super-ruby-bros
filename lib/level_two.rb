@@ -1,36 +1,23 @@
 class LevelTwo
 
-    attr_reader :platforms, :coins, :goal
+    attr_reader :platforms, :coins, :goal, :images
   
     def initialize
-      @platforms = [ Rectangle.new(x: 150, y: Window.height - 85, color: 'orange', height: 10, z:6 , width: 77),
-        Rectangle.new(x: (Window.width - 190) / 2, y: Window.height - 425, color: 'blue', height: 10, z:6 , width:40),
-        Rectangle.new(x: 0, y: Window.height - 500, color: 'purple', height: 10, z:0, width: 77),
-        Rectangle.new(x: (Window.width - 350), y: Window.height - 175, color: 'white', height: 10, z:6 , width: 77),
-        Rectangle.new(x: 125, y: Window.height - 250, color: 'orange', height: 10, z:6 , width: 77),
-        Rectangle.new(x: (Window.width - 625), y: Window.height - 150, color: 'red', height: 10, z:6 , width:40),
-        Rectangle.new(x: 0, y: Window.height - 10, color: 'orange', height: 10, z:1 , width: 77),
-        Rectangle.new(x: Window.width - 150, y: Window.height - 210, color: 'red', height: 10, z:6 , width: 77),
-        Rectangle.new(x: (Window.width - 650), y: Window.height - 335, color: 'blue', height: 10, z:6 , width:40),
-        Rectangle.new(x: (Window.width - 300), y: Window.height - 340, color: 'red', height: 10, z:6 , width:77),
-        Rectangle.new(x: Window.width - 470, y: Window.height - 275, color: 'white', height: 10, z:6 , width: 40),
-        Rectangle.new(x: 750, y: Window.height - 30 , color: 'orange', height: 10, z:6 , width: 77),
-        Rectangle.new(x: 150, y: Window.height - 420, color: 'purple', height: 10, z:6 , width: 40),
-        Rectangle.new(x: 650, y: Window.height - 100, color: 'green', height: 10, z:6 , width:40)]
+      @platforms = [ Image.new('./assets/wood.png', x: 150, y: Window.height - 85, height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: (Window.width - 190) / 2, y: Window.height - 425, height: 10, z:6 , width:40),
+        Image.new('./assets/wood.png', x: 0, y: Window.height - 500, height: 10, z:6, width: 77),
+        Image.new('./assets/wood.png', x: (Window.width - 350), y: Window.height - 175, height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: 125, y: Window.height - 250, height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: (Window.width - 625), y: Window.height - 150, height: 10, z:6 , width:40),
+        Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: Window.width - 150, y: Window.height - 210, height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: (Window.width - 650), y: Window.height - 335, height: 10, z:6 , width:40),
+        Image.new('./assets/wood.png', x: (Window.width - 300), y: Window.height - 300, height: 10, z:6 , width:77),
+        Image.new('./assets/wood.png', x: Window.width - 470, y: Window.height - 275, height: 10, z:6 , width: 40),
+        Image.new('./assets/wood.png', x: 750, y: Window.height - 30,  height: 10, z:6 , width: 77),
+        Image.new('./assets/wood.png', x: 150, y: Window.height - 420, height: 10, z:6 , width: 40),
+        Image.new('./assets/wood.png', x: 650, y: Window.height - 100, height: 10, z:6 , width:40)]
         
-      @images = [Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 500),
-      Image.new('./assets/wood.png', z: 4, x: Window.width - 350, y: Window.height - 175),
-      Image.new('./assets/wood.png', z: 4,x: 125, y: Window.height - 250),
-      Image.new('./assets/wood.png', z: 4, x: (Window.width - 625), y: Window.height - 150),
-      Image.new('./assets/wood.png', z: 4, x: 0, y: Window.height - 10),
-      Image.new('./assets/wood.png', z: 4, x: Window.width - 150, y: Window.height - 210),
-      Image.new('./assets/wood.png', z: 4, x: (Window.width - 650), y: Window.height - 335),
-      Image.new('./assets/wood.png', z: 4, x: (Window.width - 300), y: Window.height - 340),
-      Image.new('./assets/wood.png', z: 4, x: 150, y: Window.height - 85),
-      Image.new('./assets/wood.png', z: 4, x: (Window.width - 190) / 2, y: Window.height - 425),
-      Image.new('./assets/wood.png', z: 4, x: Window.width - 470, y: Window.height - 275),
-      Image.new('./assets/wood.png', z: 4, x: 750, y: Window.height - 30 )]
-      
       @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 250, y: Window.height - 285, height: 40, width: 40, z: 5),
         Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z: 5),
         Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 150, y: Window.height - 285, height: 40, width: 40, z: 5)]
@@ -47,10 +34,6 @@ class LevelTwo
 
       @coins.each do |coin|
         coin.add
-      end
-
-      @images.each do |image|
-        image.add
       end
 
       @goal.add

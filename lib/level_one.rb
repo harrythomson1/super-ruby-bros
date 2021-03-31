@@ -3,16 +3,14 @@ class LevelOne
   attr_reader :platforms, :coins, :enemies, :goal
 
   def initialize
-    @platforms = [Rectangle.new(x: 0, y: Window.height - 10, color: 'green', height: 10, z: 3, width: Window.width),
-      Rectangle.new(x: (Window.width - 200) / 2, y: Window.height - 85, color: 'green', height: 10, z: 3, width: 200),
-      Rectangle.new(x: 0, y: Window.height - 165, color: 'green', height: 10, z: 3, width: 350),
-      Rectangle.new(x: Window.width - 350, y: Window.height - 175, color: 'green', height: 10, z: 3, width: 350),
-      Rectangle.new(x: (Window.width - 200) / 2, y: Window.height - 250, color: 'green', height: 10, z: 3, width: 200),
-      Rectangle.new(x: 300, y: Window.height - 325, color: 'green', height: 10, z: 3, width: 100),
-      Rectangle.new(x: 150, y: Window.height - 400, color: 'green', height: 10, z: 3, width: 100),
-      Rectangle.new(x: 0, y: Window.height - 475, color: 'green', height: 10, z: 3, width: 100)]
-
-    @images = []
+    @platforms = [Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, z: 3, width: Window.width),
+      Image.new('./assets/wood.png', x: (Window.width - 200) / 2, y: Window.height - 85, height: 10, z: 3, width: 200),
+      Image.new('./assets/wood.png', x: 0, y: Window.height - 165, height: 10, z: 3, width: 350),
+      Image.new('./assets/wood.png', x: Window.width - 350, y: Window.height - 175, height: 10, z: 3, width: 350),
+      Image.new('./assets/wood.png', x: (Window.width - 200) / 2, y: Window.height - 250, height: 10, z: 3, width: 200),
+      Image.new('./assets/wood.png', x: 300, y: Window.height - 325, height: 10, z: 3, width: 100),
+      Image.new('./assets/wood.png', x: 150, y: Window.height - 400, height: 10, z: 3, width: 100),
+      Image.new('./assets/wood.png', x: 0, y: Window.height - 475, height: 10, z: 3, width: 100)]
 
     @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 250, y: Window.height - 285, height: 40, width: 40, z:10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z:10),
@@ -32,10 +30,6 @@ class LevelOne
 
     @coins.each do |coin|
       coin.add
-    end
-
-    @images.each do |image|
-      image.add
     end
 
     @enemies.each do |enemy|
