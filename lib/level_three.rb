@@ -1,6 +1,6 @@
 class LevelThree
 
-  attr_reader :platforms, :enemies, :coins, :images
+  attr_reader :platforms, :enemies, :coins, :images, :portal
 
   def initialize
     @platforms = [Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, width: 100, z: 10),
@@ -34,8 +34,11 @@ class LevelThree
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 440, y: Window.height - 270, height:40, width: 40, z: 10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 50, y: Window.height - 200, height:40, width: 40, z: 10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 115, y: Window.height - 440, height:40, width: 40, z: 10)]
-    
-    @goal = Triangle.new(x1: Window.width - 60, x2: Window.width - 110, x3: Window.width - 10, y1: Window.height - 670, y2: Window.height - 620, y3: Window.height - 620, color: 'fuchsia', z: 10)
+
+    @goal = Triangle.new(x1: Window.width - 60, x2: Window.width - 110, x3: Window.width - 10, y1: Window.height - 670, y2: Window.height - 620, y3: Window.height - 620, color: 'fuchsia', z: 0)
+
+    @portal = Sprite.new('./assets/portal.png', clip_width: 32, clip_height: 48, height: 68, width: 52, time: 300, loop: true, x: Window.width - 100, y: Window.height - 680,  z: 10)
+
     @enemy_0_speed = 0
     @enemy_1_speed = 0
     @enemy_2_speed = 0
@@ -57,6 +60,8 @@ class LevelThree
      end
 
     @goal.add
+
+    @portal.add
   end
 
   def coin_animation

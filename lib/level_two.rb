@@ -1,6 +1,6 @@
 class LevelTwo
 
-    attr_reader :platforms, :coins, :goal, :images
+    attr_reader :platforms, :coins, :goal, :images, :portal
   
     def initialize
       @platforms = [ Image.new('./assets/wood.png', x: 150, y: Window.height - 85, height: 10, z:6 , width: 77),
@@ -22,8 +22,10 @@ class LevelTwo
         Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z: 5),
         Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 150, y: Window.height - 285, height: 40, width: 40, z: 5)]
   
-      @goal = Triangle.new(x1: 40, x2: 10, x3: 70, y1: Window.height - 550, y2: Window.height - 500, y3: Window.height - 500, color: 'fuchsia', z: 6)
+      @goal = Triangle.new(x1: 40, x2: 10, x3: 70, y1: Window.height - 550, y2: Window.height - 500, y3: Window.height - 500, color: 'fuchsia', z: 0)
       
+      @portal = Sprite.new('./assets/portal.png', clip_width: 32, clip_height: 48, height: 68, width: 52, time: 300, loop: true, x: 25, y: 135,  z: 10)
+
       @enemy_speed = 0
     end
   
@@ -37,12 +39,18 @@ class LevelTwo
       end
 
       @goal.add
+
+      @portal.add
     end
 
     def coin_animation
       @coins.each do |coin|
         coin.play
       end
+    end
+
+    def enemy_movement
+      nil
     end
   
   

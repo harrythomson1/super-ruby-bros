@@ -164,7 +164,6 @@ def player_methods
 end
 
 def level_methods(level)
-  level.portal.play(flip: :horizontal)
   level.add_assets
   level.enemy_movement
 end
@@ -183,14 +182,17 @@ update do
   @player.gravity
   player_methods
   if @player.lives > 0 && @stage_one == true
-    @level_one.check_enemy_0_boundary
     level_methods(@level_one)
+    @level_one.check_enemy_0_boundary
+    @level_one.portal.play(flip: :horizontal)
     @level_one.coin_animation
   elsif @player.lives > 0 && @stage_two == true 
-    @level_two.add_assets
+    level_methods(@level_two)
+    @level_two.portal.play(flip: :horizontal)
     @level_two.coin_animation
   elsif @player.lives > 0 && @stage_three == true
     level_methods(@level_three)
+    @level_three.portal.play
     @level_three.coin_animation
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
