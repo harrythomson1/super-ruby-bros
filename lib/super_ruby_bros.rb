@@ -160,23 +160,31 @@ update do
   if @player.lives > 0 && @stage_one == true
     @level_one.check_enemy_0_boundary
     level_methods(@level_one)
+    @level_one.coin_animation
   elsif @player.lives > 0 && @stage_two == true
     @level_two.add_assets
-  elsif @player.lives > 0 && @winning_screen == true
-      background = Image.new('./assets/gameover.png', z: 100, x: 150, y: 200)
-      endgame_text = Text.new('Coins Collected', z: 101, color: 'red', size: 25, x: 360, y: 500 )
-      total_coins = Text.new(@player.coins, z: 101, color: 'red', size: 40, x: 438, y: 540)
-      endgame_text = Text.new('Hit ENTER to go again!', z: 101, color: 'red', size: 20, x:350, y: 600 )
+    @level_two.coin_animation
   elsif @player.lives > 0 && @stage_three == true
     level_methods(@level_three)
+    @level_three.coin_animation
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
-  else
-    background = Image.new('./assets/winner.png', z: 3, x: 150, y: 200)
+  elsif @player.lives > 0 && @winning_screen == true
+    background = Image.new('./assets/win.png', z: 3, x: 150, y: 200)
+    background = Image.new('./assets/trophy.png', z: 3, x: 555, y: 400)
+    background = Image.new('./assets/trophy.png', z: 3, x: 20, y: 400)
+    @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 520, y: 450, height:40, width: 84, z: 10),
+    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 450, y: 450, height:40, width: 84, z: 10),
+    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 380, y: 450, height:40, width: 84, z: 10)]
     endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
     total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
-    endgame_text = Text.new('You suck.. Hit Enter to try again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
+    endgame_text = Text.new('Hit Enter to play again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
+  else
+    background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200)
+    endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
+    total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
+    endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
   end
 end
 

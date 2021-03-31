@@ -19,23 +19,26 @@ class LevelThree
       Rectangle.new(x: 175, y: Window.height - 400, height: 10, width: 50, color: 'green', z: 10),
       Rectangle.new(x: 320, y: Window.height - 350, height: 10, width: 30, color: 'green', z: 10),
       Rectangle.new(x: 410, y: Window.height - 430, height: 10, width: 50, color: 'green', z: 10),
-      Rectangle.new(x: 550, y: Window.height - 470, height: 10, width: 30, color: 'green', z: 10),
+      Rectangle.new(x: 550, y: Window.height - 470, height: 10, width: 60, color: 'green', z: 10),
       Rectangle.new(x: 610, y: Window.height - 550, height: 10, width: 60, color: 'yellow', z: 10),
       Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 10)]
 
-    @images = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 50, y: Window.height - 200, z:100, height: 40, width: 40)]
+    @images = [Image.new('./assets/crab.png', x: 200, y: Window.height - 35, width: 50, height: 30,size: 20, z: 10),
+      Image.new('./assets/jellyfish.png', x: 490, y: Window.height - 270, width: 175, height: 100, size: 20, z: 10),
+      Image.new('./assets/jellyfish.png', x: 115, y: Window.height - 450, width: 175, height: 100, size: 20, z: 10)]
 
-    @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 10),
-      Square.new(x: 490, y: Window.height - 270, size: 20, z: 10),
-      Square.new(x: 115, y: Window.height - 450, size: 20, z: 10)]
+    @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 0),
+      Square.new(x: 490, y: Window.height - 270, size: 20, z: 0),
+      Square.new(x: 115, y: Window.height - 450, size: 20, z: 0)]
 
-    @coins = [Square.new(x: Window.width - 30, y: Window.height - 200, size: 25, color: 'yellow', z: 10),
-      Square.new(x: Window.width - 30, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
-      Square.new(x: 540, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
-      Square.new(x: 490, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
-      Square.new(x: 440, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
-      Square.new(x: 50, y: Window.height - 200, size: 25, color: 'yellow', z: 10),
-      Square.new(x: 115, y: Window.height - 440, size: 25, color: 'yellow', z: 10)]
+
+    @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 200, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 270, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 540, y: Window.height - 270, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 490, y: Window.height - 270, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 440, y: Window.height - 270, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 50, y: Window.height - 200, height:40, width: 40, z: 10),
+      Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 115, y: Window.height - 440, height:40, width: 40, z: 10)]
 
     @goal = Triangle.new(x1: Window.width - 60, x2: Window.width - 110, x3: Window.width - 10, y1: Window.height - 670, y2: Window.height - 620, y3: Window.height - 620, color: 'fuchsia', z: 10)
     @enemy_0_speed = 0
@@ -54,15 +57,21 @@ class LevelThree
       coin.add
     end
 
-    @images.each do |image|
-      image.add
-    end
+    @images.each do |images|
+      images.add
+     end
 
     @enemies.each do |enemy|
       enemy.add
      end
 
     @goal.add
+  end
+
+  def coin_animation
+    @coins.each do |coin|
+      coin.play
+    end
   end
 
   def check_enemy_0_boundary
@@ -91,8 +100,11 @@ class LevelThree
 
   def enemy_movement
     @enemies[0].x += @enemy_0_speed
+    @images[0].x += @enemy_0_speed
     @enemies[1].y += @enemy_1_speed
+    @images[1].y += @enemy_1_speed
     @enemies[2].y += @enemy_2_speed
+    @images[2].y += @enemy_2_speed
   end
 
 end
