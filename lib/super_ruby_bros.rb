@@ -164,7 +164,7 @@ def player_methods
 end
 
 def level_methods(level)
-  level.portal.play
+  level.portal.play(flip: :horizontal)
   level.add_assets
   level.enemy_movement
 end
