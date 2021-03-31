@@ -1,6 +1,6 @@
 class LevelThree
 
-  attr_reader :platforms, :enemies, :coins, :images
+  attr_reader :platforms, :enemies, :coins, :images, :goal
 
   def initialize
     @platforms = [Rectangle.new(x: 0, y: Window.height - 10, height: 10, width: 100, color: 'green', z: 10),
@@ -24,11 +24,11 @@ class LevelThree
       Rectangle.new(x: Window.width - 200, y: Window.height - 620, height: 10, width: 200, color: 'green', z: 10)]
 
     @images = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 50, y: Window.height - 200, z:100, height: 40, width: 40)]
-    
+
     @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 10),
       Square.new(x: 490, y: Window.height - 270, size: 20, z: 10),
       Square.new(x: 115, y: Window.height - 450, size: 20, z: 10)]
-    
+
     @coins = [Square.new(x: Window.width - 30, y: Window.height - 200, size: 25, color: 'yellow', z: 10),
       Square.new(x: Window.width - 30, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
       Square.new(x: 540, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
@@ -36,7 +36,7 @@ class LevelThree
       Square.new(x: 440, y: Window.height - 270, size: 25, color: 'yellow', z: 10),
       Square.new(x: 50, y: Window.height - 200, size: 25, color: 'yellow', z: 10),
       Square.new(x: 115, y: Window.height - 440, size: 25, color: 'yellow', z: 10)]
-    
+
     @goal = Triangle.new(x1: Window.width - 60, x2: Window.width - 110, x3: Window.width - 10, y1: Window.height - 670, y2: Window.height - 620, y3: Window.height - 620, color: 'fuchsia', z: 10)
     @enemy_0_speed = 0
     @enemy_1_speed = 0
