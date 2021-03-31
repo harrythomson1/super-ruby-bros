@@ -164,6 +164,7 @@ def player_methods
 end
 
 def level_methods(level)
+  level.portal.play
   level.add_assets
   level.enemy_movement
 end

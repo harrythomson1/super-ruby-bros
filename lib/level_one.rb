@@ -1,6 +1,6 @@
 class LevelOne
 
-  attr_reader :platforms, :coins, :enemies, :goal
+  attr_reader :platforms, :coins, :enemies, :goal, :portal
 
   def initialize
     @platforms = [Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, z: 3, width: Window.width),
@@ -18,7 +18,9 @@ class LevelOne
 
     @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z:10)]
 
-    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 10)
+    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 0)
+    
+    @portal = Sprite.new('./assets/blue_portal.png', clip_width: 95, time: 300, loop: true, x: 50, y: 100,  z: 10)
     
     @enemy_speed = 0
   end
@@ -37,6 +39,8 @@ class LevelOne
      end
 
     @goal.add
+
+    @portal.add
   end
 
   def coin_animation
