@@ -4,6 +4,7 @@ require_relative 'sounds'
 require_relative 'level_one'
 require_relative 'level_two'
 require_relative 'level_three'
+require_relative 'win_screen'
 
 
 set title: "Super Ruby Bros", background: 'red', width: 900, height: 700
@@ -14,16 +15,17 @@ GRAVITY = 7
 @level_two = LevelTwo.new
 @level_three = LevelThree.new
 @player = Player.new
+@win_screen = WinScreen.new
 @sounds = Sounds.new
 @game_over_sound = false
-@song = Music.new('./assets/song.mp3')
-@song.volume = 50
-@song.play
-@song.loop = true
+# @song = Music.new('./assets/song.mp3')
+# @song.volume = 50
+# @song.play
+# @song.loop = true
 
-@stage_one = false
+@stage_one = true
 @stage_two = false
-@stage_three = true
+@stage_three = false
 @winning_screen = false
 
 on :key_held do |event|
@@ -202,15 +204,10 @@ update do
     @level_three.check_enemy_1_boundary
     @level_three.check_enemy_2_boundary
   elsif @player.lives > 0 && @winning_screen == true
-    background = Image.new('./assets/win.png', z: 3, x: 150, y: 200)
-    background = Image.new('./assets/trophy.png', z: 3, x: 555, y: 400)
-    background = Image.new('./assets/trophy.png', z: 3, x: 20, y: 400)
-    @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 520, y: 450, height:40, width: 84, z: 10),
-    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 450, y: 450, height:40, width: 84, z: 10),
-    Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: 380, y: 450, height:40, width: 84, z: 10)]
-    endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
-    total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
-    endgame_text = Text.new('Hit Enter to play again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
+    @win_screen.add_assets
+    Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
+    @player.y -= 7
+    @win_screen.coin_animation
   else
     if @game_over_sound == false
       @song.stop

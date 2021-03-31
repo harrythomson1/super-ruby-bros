@@ -25,8 +25,8 @@ class Player
 
   def draw
     @square = Rectangle.new(x: @x, y: @y, color: 'blue', width: 33, height: 47)
-    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 500, color: 'red')
-    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 500, y: 50, color: 'red')
+    @coin_counter = Text.new("Coins: #{@coins}", z: 4, x: 10, color: 'red')
+    @lives_counter = Text.new("Lives: #{@lives}", z: 4, x: 10, y: 25, color: 'red')
   end
 
   def reset
