@@ -18,10 +18,10 @@ GRAVITY = 7
 @win_screen = WinScreen.new
 @sounds = Sounds.new
 @game_over_sound = false
-# @song = Music.new('./assets/song.mp3')
-# @song.volume = 50
-# @song.play
-# @song.loop = true
+@song = Music.new('./assets/song.mp3')
+@song.volume = 50
+@song.play
+@song.loop = true
 
 @stage_one = true
 @stage_two = false
