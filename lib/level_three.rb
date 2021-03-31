@@ -26,8 +26,6 @@ class LevelThree
     @enemies = [Square.new(x: 200, y: Window.height - 25, size: 20, z: 10),
       Square.new(x: 490, y: Window.height - 270, size: 20, z: 10),
       Square.new(x: 115, y: Window.height - 450, size: 20, z: 10)]
-
-    @images = []
     
     @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 200, height:40, width: 40, z: 10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 30, y: Window.height - 270, height:40, width: 40, z: 10),
@@ -53,10 +51,6 @@ class LevelThree
     @coins.each do |coin|
       coin.add
     end
-
-    @images.each do |images|
-      images.add
-     end
 
     @enemies.each do |enemy|
       enemy.add

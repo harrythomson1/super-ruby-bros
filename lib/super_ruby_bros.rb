@@ -14,9 +14,9 @@ GRAVITY = 7
 @level_three = LevelThree.new
 @player = Player.new
 
-@stage_one = false
+@stage_one = true
 @stage_two = false
-@stage_three = true
+@stage_three = false
 
 on :key_held do |event|
   if event.key == 'a' && @player.x > 0
