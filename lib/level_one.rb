@@ -1,18 +1,16 @@
 class LevelOne
 
-  attr_reader :platforms, :coins, :enemies, :goal
+  attr_reader :platforms, :coins, :enemies, :goal, :portal
 
   def initialize
-    @platforms = [Rectangle.new(x: 0, y: Window.height - 10, color: 'green', height: 10, z: 3, width: Window.width),
-      Rectangle.new(x: (Window.width - 200) / 2, y: Window.height - 85, color: 'green', height: 10, z: 3, width: 200),
-      Rectangle.new(x: 0, y: Window.height - 165, color: 'green', height: 10, z: 3, width: 350),
-      Rectangle.new(x: Window.width - 350, y: Window.height - 175, color: 'green', height: 10, z: 3, width: 350),
-      Rectangle.new(x: (Window.width - 200) / 2, y: Window.height - 250, color: 'green', height: 10, z: 3, width: 200),
-      Rectangle.new(x: 300, y: Window.height - 325, color: 'green', height: 10, z: 3, width: 100),
-      Rectangle.new(x: 150, y: Window.height - 400, color: 'green', height: 10, z: 3, width: 100),
-      Rectangle.new(x: 0, y: Window.height - 475, color: 'green', height: 10, z: 3, width: 100)]
-
-    @images = []
+    @platforms = [Image.new('./assets/wood.png', x: 0, y: Window.height - 10, height: 10, z: 3, width: Window.width),
+      Image.new('./assets/wood.png', x: (Window.width - 200) / 2, y: Window.height - 85, height: 10, z: 3, width: 200),
+      Image.new('./assets/wood.png', x: 0, y: Window.height - 165, height: 10, z: 3, width: 350),
+      Image.new('./assets/wood.png', x: Window.width - 350, y: Window.height - 175, height: 10, z: 3, width: 350),
+      Image.new('./assets/wood.png', x: (Window.width - 200) / 2, y: Window.height - 250, height: 10, z: 3, width: 200),
+      Image.new('./assets/wood.png', x: 300, y: Window.height - 325, height: 10, z: 3, width: 100),
+      Image.new('./assets/wood.png', x: 150, y: Window.height - 400, height: 10, z: 3, width: 100),
+      Image.new('./assets/wood.png', x: 0, y: Window.height - 475, height: 10, z: 3, width: 100)]
 
     @coins = [Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 250, y: Window.height - 285, height: 40, width: 40, z:10),
       Sprite.new('./assets/coin.png', clip_width: 84, time: 300, loop: true, x: Window.width - 200, y: Window.height - 285, height: 40, width: 40, z:10),
@@ -20,7 +18,9 @@ class LevelOne
 
     @enemies = [Square.new(x: Window.width - 350, y: (Window.height - 174) - 15, size: 20, z:10)]
 
-    @goal = Triangle.new(x1: 50, x2: 10, x3: 90, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 10)
+    @goal = Triangle.new(x1: 25, x2: -15, x3: 65, y1: Window.height - 525, y2: Window.height - 475, y3: Window.height - 475, color: 'fuchsia', z: 0)
+    
+    @portal = Sprite.new('./assets/portal.png', clip_width: 32, clip_height: 48, height: 68, width: 52, time: 300, loop: true, x: 8, y: 165,  z: 10)
     
     @enemy_speed = 0
   end
@@ -34,15 +34,13 @@ class LevelOne
       coin.add
     end
 
-    @images.each do |image|
-      image.add
-    end
-
     @enemies.each do |enemy|
       enemy.add
      end
 
     @goal.add
+
+    @portal.add
   end
 
   def coin_animation

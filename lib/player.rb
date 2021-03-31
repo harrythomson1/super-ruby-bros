@@ -18,7 +18,9 @@ class Player
     @coins = 0
     @lives = 3
     @touching_platform = false
+    @death_sound = Sound.new('./assets/death.wav')
     @hero = Sprite.new('./assets/hero.png', z: 5, clip_width: 33, height: 57, width: 33)
+
   end
 
   def draw
@@ -71,6 +73,7 @@ end
 def fall_death
   if @y > Window.height
     lose_life
+    @death_sound.play
   end
 end
 

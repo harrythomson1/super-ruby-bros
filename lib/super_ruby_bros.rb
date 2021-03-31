@@ -1,5 +1,6 @@
 require 'ruby2d'
 require_relative 'player'
+require_relative 'sounds'
 require_relative 'level_one'
 require_relative 'level_two'
 require_relative 'level_three'
@@ -13,6 +14,12 @@ GRAVITY = 7
 @level_two = LevelTwo.new
 @level_three = LevelThree.new
 @player = Player.new
+@sounds = Sounds.new
+@game_over_sound = false
+@song = Music.new('./assets/song.mp3')
+@song.volume = 50
+@song.play
+@song.loop = true
 
 @stage_one = false
 @stage_two = false
@@ -28,14 +35,28 @@ on :key_held do |event|
     @player.hero.play
   elsif event.key == 'space' && @player.jumper_state == 'grounded'
     @player.jumper_state = :jumping
+    @sounds.jump
   elsif event.key == 'return'
     @player.hard_reset = true
     @stage_one = true
     @stage_two = false
     @stage_three = false
+    coin_reset(@level_one)    
+    coin_reset(@level_two)    
+    coin_reset(@level_three)    
+    @game_over_sound = false
+    @song.play
   end
 end
 
+
+def coin_reset(level)
+  level.coins.each do |coin|
+    if coin.y > 1000 
+      coin.y -= 1000
+    end
+  end
+end
 
 on :key_up do |event|
   if event.key == 'space'
@@ -76,21 +97,24 @@ def coin_collision
     @level_one.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
-        coin.y = 1000
+        @sounds.coin
+        coin.y += 1000
       end
     end
   elsif @stage_two == true
     @level_two.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
-        coin.y = 1000
+        @sounds.coin
+        coin.y += 1000
       end
     end
   elsif @stage_three == true
     @level_three.coins.each do |coin|
       if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
         @player.coins += 1
-        coin.y = 1000
+        @sounds.coin
+        coin.y += 1000
       end
     end
   end
@@ -101,12 +125,14 @@ def enemy_collison
     @level_one.enemies.each do |enemy|
       if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
         @player.lose_life
+        @sounds.death
       end
     end
   elsif @stage_three == true
     @level_three.enemies.each do |enemy|
       if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
         @player.lose_life
+        @sounds.death
       end
     end
   end
@@ -117,12 +143,14 @@ def has_won?
     if @level_one.goal.contains?(@player.square.x1, @player.square.y1) || @level_one.goal.contains?(@player.square.x2, @player.square.y2) || @level_one.goal.contains?(@player.square.x3, @player.square.y3) || @level_one.goal.contains?(@player.square.x4, @player.square.y4)
       @stage_one = false
       @stage_two = true
+      @sounds.next_level
       @player.reset = true
     end
   elsif @stage_two == true
     if @level_two.goal.contains?(@player.square.x1, @player.square.y1) || @level_two.goal.contains?(@player.square.x2, @player.square.y2) || @level_two.goal.contains?(@player.square.x3, @player.square.y3) || @level_two.goal.contains?(@player.square.x4, @player.square.y4)
       @stage_two = false
       @stage_three = true
+      @sounds.next_level
       @player.reset = true
     end
   elsif @player.lives > 0 && @stage_three == true && @level_three.goal.contains?(@player.square.x1, @player.square.y1) || @level_three.goal.contains?(@player.square.x2, @player.square.y2) || @level_three.goal.contains?(@player.square.x3, @player.square.y3) || @level_three.goal.contains?(@player.square.x4, @player.square.y4)
@@ -158,14 +186,17 @@ update do
   @player.gravity
   player_methods
   if @player.lives > 0 && @stage_one == true
-    @level_one.check_enemy_0_boundary
     level_methods(@level_one)
+    @level_one.check_enemy_0_boundary
+    @level_one.portal.play(flip: :horizontal)
     @level_one.coin_animation
-  elsif @player.lives > 0 && @stage_two == true
-    @level_two.add_assets
+  elsif @player.lives > 0 && @stage_two == true 
+    level_methods(@level_two)
+    @level_two.portal.play(flip: :horizontal)
     @level_two.coin_animation
   elsif @player.lives > 0 && @stage_three == true
     level_methods(@level_three)
+    @level_three.portal.play
     @level_three.coin_animation
     @level_three.check_enemy_0_boundary
     @level_three.check_enemy_1_boundary
@@ -181,16 +212,16 @@ update do
     total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
     endgame_text = Text.new('Hit Enter to play again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
   else
-    background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200)
-    endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
-    total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
+    if @game_over_sound == false
+      @song.stop
+      @sounds.game_over
+      @game_over_sound = true
+    end
+    background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200) 
+    endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 ) 
+    total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540) 
     endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
   end
 end
 
 show
-
-# background = Image.new('./assets/gameover.png', z: 3, x: 150, y: 200)
-# endgame_text = Text.new('Coins Collected', z: 4, color: 'red', size: 25, x: 360, y: 500 )
-# total_coins = Text.new(@player.coins, z: 4, color: 'red', size: 40, x: 438, y: 540)
-# endgame_text = Text.new('Hit Enter to try again...', z: 4, color: 'red', size: 20, x:350, y: 600 )
